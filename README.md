@@ -6,7 +6,7 @@
 
 ### An elite SEO plugin for Claude Code — a senior consultant that *audits* and *builds*.
 
-[![Version](https://img.shields.io/badge/version-0.2.0-blue)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.3.0-blue)](./CHANGELOG.md)
 [![validate](https://github.com/andersonmeloseo/andersonmelo-seo/actions/workflows/validate.yml/badge.svg)](https://github.com/andersonmeloseo/andersonmelo-seo/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin-7c3aed)](https://docs.claude.com/en/docs/claude-code)
@@ -48,7 +48,7 @@ Every skill operates in one of two declared modes:
 
 ## The skills
 
-One orchestrator (`/seo`) routes to eight specialists, grouped by the two jobs:
+One orchestrator (`/seo`) routes to nine specialists, grouped by the two jobs:
 
 ### 🔍 Diagnose
 | Skill | What it does |
@@ -57,6 +57,7 @@ One orchestrator (`/seo`) routes to eight specialists, grouped by the two jobs:
 | **seo-topical** | Topical authority architecture: entity-first topical maps, clusters, intent coverage |
 | **seo-on-page** | Single-URL on-page optimization + competitive content briefs |
 | **seo-geo** | GEO/AEO/LLMO: citability for AI Overviews, ChatGPT, Perplexity, Gemini, Claude |
+| **seo-backlinks** | Backlink profile, referring domains, anchor text, link gap — free-tier (GSC/Bing/Common Crawl) or paid |
 
 ### 🏗️ Build
 | Skill | What it does |

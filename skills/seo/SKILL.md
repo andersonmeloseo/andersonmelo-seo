@@ -1,6 +1,6 @@
 ---
 name: seo
-description: SEO de elite — um consultor sênior que diagnostica E constrói. Use SEMPRE que o usuário pedir auditoria de site, análise técnica, plano de correção, topical authority, mapa de tópicos/clusters, entidades/knowledge graph, Information Gain, otimização on-page de uma URL, content brief, schema/dados estruturados, SEO programático em escala, rank-and-rent local, HTML5 semântico, Core Web Vitals/performance, ou otimização para IA (GEO/AEO/LLMO — ChatGPT, Perplexity, Google AI Overviews, Gemini, Claude). Acione mesmo sem a palavra "SEO": "por que minha página não rankeia", "como aparecer no ChatGPT", "revisar a estrutura do meu site", "meu conteúdo não é citado pela IA", "montar um portal programático", "gerar milhares de páginas de cidade", "quero dominar um nicho", "analisar o conteúdo do concorrente" — tudo isto dispara esta skill. Roteador de 8 sub-skills especializadas. Opera em português.
+description: SEO de elite — um consultor sênior que diagnostica E constrói. Use SEMPRE que o usuário pedir auditoria de site, análise técnica, plano de correção, topical authority, mapa de tópicos/clusters, entidades/knowledge graph, Information Gain, otimização on-page de uma URL, content brief, schema/dados estruturados, SEO programático em escala, rank-and-rent local, HTML5 semântico, Core Web Vitals/performance, ou otimização para IA (GEO/AEO/LLMO — ChatGPT, Perplexity, Google AI Overviews, Gemini, Claude). Acione mesmo sem a palavra "SEO": "por que minha página não rankeia", "como aparecer no ChatGPT", "revisar a estrutura do meu site", "meu conteúdo não é citado pela IA", "montar um portal programático", "gerar milhares de páginas de cidade", "quero dominar um nicho", "analisar o conteúdo do concorrente" — tudo isto dispara esta skill. Roteador de 9 sub-skills especializadas. Opera em português.
 user-invokable: true
 argument-hint: "[comando] [url|tópico]"
 license: MIT
@@ -59,6 +59,7 @@ Identifique a intenção e carregue a sub-skill. Não recite tudo de uma vez.
 | Schema/JSON-LD, dados estruturados, rich results, knowledge graph, `aggregateRating` | `schema` | **seo-schema** |
 | HTML5 semântico, performance, Core Web Vitals na marcação, Lighthouse, acessibilidade | `semantic-html` | **seo-semantic-html** |
 | Local SEO, Google Business Profile, NAP, rank-and-rent, lead-gen local, multi-cidade | `local` | **seo-local-rank-and-rent** |
+| Perfil de backlinks, referring domains, anchor text, link tóxico, link gap, autoridade | `backlinks` | **seo-backlinks** |
 
 Muitos pedidos cruzam skills. Uma auditoria completa toca quase todas. Um portal programático combina topical + programmatic + schema + semantic-html + geo. Carregue as que o trabalho exigir e diga ao usuário o caminho.
 

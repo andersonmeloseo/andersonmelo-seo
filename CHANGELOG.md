@@ -13,6 +13,12 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 - Referência compartilhada de padrões de produção.
 - Instalador manual (`install.sh`/`uninstall.sh`) como fallback ao `/plugin`.
 
+## [0.3.0] — 2026-06
+
+### Adicionado
+- Nova sub-skill **`seo-backlinks`**: análise de perfil de links e autoridade off-page com método de free-tier (GSC, Bing Webmaster, Common Crawl) ou dados pagos quando fornecidos — preenche a zona cega de backlinks que os auditores apontavam. Nunca estima DA/DR sem fonte.
+- `docs/QUICKSTART.md`: guia de teste com prompts copia-e-cola.
+
 ## [0.2.0] — 2026-06
 
 ### Adicionado
