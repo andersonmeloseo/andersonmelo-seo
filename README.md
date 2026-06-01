@@ -18,6 +18,8 @@
 
 ---
 
+📖 **[Manual completo (PT-BR)](./docs/MANUAL.md)** · 🚀 [Como testar](./docs/QUICKSTART.md) · 🏛️ [Arquitetura](./docs/ARCHITECTURE.md)
+
 > **Note for English readers:** the skills are written in **Portuguese (PT-BR)**, tuned for the Brazilian SEO market. The methodology is universal — Claude executes the skills in whatever language you talk to it. This README is in English for discovery.
 
 ## What this is
