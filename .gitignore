@@ -1,0 +1,26 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Python (scripts opcionais)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node (caso ferramentas futuras)
+node_modules/
+
+# Workspace de avaliação do skill-creator (não publicar)
+*-workspace/
+evals/results/
+feedback.json
+
+# Temporários
+*.log
+*.tmp

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "andersonmelo-seo",
+  "owner": {
+    "name": "Anderson Melo",
+    "url": "https://github.com/andersonmeloseo"
+  },
+  "metadata": {
+    "description": "Plugin de SEO de elite para Claude Code — metodologia de consultor sênior que AUDITA e CONSTRÓI. Topical authority (Koray Tuğberk Gübür), knowledge graph e entidades (Dixon Jones), Information Gain, SEO programático em escala com travas anti-thin, rank-and-rent local, HTML5 semântico, schema/JSON-LD, performance Lighthouse 100 e GEO/AEO/LLMO para AI Search (ChatGPT, Perplexity, Google AI Overviews, Gemini, Claude). Orquestrador + 8 sub-skills, em português, com 2 modos de operação que nunca alucinam métrica."
+  },
+  "plugins": [
+    {
+      "name": "andersonmelo-seo",
+      "source": "./",
+      "description": "SEO de elite para Claude Code: um consultor sênior que diagnostica e constrói. Auditoria técnica/semântica, topical authority, mapas de tópicos e entidades, Information Gain, on-page e content briefs, schema/knowledge graph, SEO programático em escala, rank-and-rent local, HTML5 semântico, performance e GEO/AEO/LLMO. 1 orquestrador + 8 sub-skills, PT-BR.",
+      "author": {
+        "name": "Anderson Melo",
+        "email": "andersonmeloseo@gmail.com",
+        "url": "https://andersonmeloseo.com.br"
+      },
+      "category": "marketing",
+      "homepage": "https://github.com/andersonmeloseo/andersonmelo-seo",
+      "keywords": [
+        "seo",
+        "seo-tecnico",
+        "semantic-seo",
+        "topical-authority",
+        "knowledge-graph",
+        "entidades",
+        "information-gain",
+        "programmatic-seo",
+        "rank-and-rent",
+        "local-seo",
+        "schema-org",
+        "json-ld",
+        "core-web-vitals",
+        "e-e-a-t",
+        "html5-semantico",
+        "lighthouse",
+        "geo",
+        "aeo",
+        "llmo",
+        "ai-search",
+        "ai-overviews",
+        "chatgpt",
+        "perplexity",
+        "llms-txt",
+        "claude-code",
+        "portugues",
+        "brasil"
+      ]
+    }
+  ]
+}
