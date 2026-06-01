@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="assets/banner.svg" alt="andersonmelo-seo — SEO de elite para Claude Code" width="100%">
+
 # andersonmelo-seo
 
 ### An elite SEO plugin for Claude Code — a senior consultant that *audits* and *builds*.
@@ -116,6 +118,12 @@ Built by **[Anderson Melo](https://andersonmeloseo.com.br)** — SEO consultant 
 - 💼 Consultoria de SEO programático, Local SEO e GEO
 
 If this plugin helps you, a ⭐ on the repo helps it reach more people.
+
+## Contributing
+
+Issues and PRs are welcome — especially SEO corrections backed by a source. See
+[CONTRIBUTING.md](./CONTRIBUTING.md) and the [architecture overview](./docs/ARCHITECTURE.md).
+The one rule: never present an estimate as a measurement.
 
 ## License
 

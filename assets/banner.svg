@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-label="andersonmelo-seo — SEO de elite para Claude Code">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0e1a"/>
+      <stop offset="1" stop-color="#0f1830"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <style>
+      .t { font-family: 'Inter','Segoe UI',system-ui,-apple-system,Arial,sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="360" fill="url(#bg)"/>
+  <rect x="0" y="0" width="8" height="360" fill="url(#accent)"/>
+
+  <!-- entity-graph motif (knowledge graph / entidades) -->
+  <g stroke="#2dd4bf" stroke-opacity="0.35" stroke-width="1.5" fill="none">
+    <line x1="1040" y1="90"  x2="1140" y2="150"/>
+    <line x1="1140" y1="150" x2="1070" y2="240"/>
+    <line x1="1140" y1="150" x2="1215" y2="220"/>
+    <line x1="1040" y1="90"  x2="960"  y2="170"/>
+    <line x1="960"  y1="170" x2="1070" y2="240"/>
+    <line x1="960"  y1="170" x2="1000" y2="285"/>
+  </g>
+  <g fill="#34d399">
+    <circle cx="1140" cy="150" r="10" fill-opacity="0.95"/>
+    <circle cx="1040" cy="90"  r="6" fill-opacity="0.8"/>
+    <circle cx="960"  cy="170" r="7" fill-opacity="0.8"/>
+    <circle cx="1070" cy="240" r="6" fill-opacity="0.8"/>
+    <circle cx="1215" cy="220" r="5" fill-opacity="0.7"/>
+    <circle cx="1000" cy="285" r="5" fill-opacity="0.7"/>
+  </g>
+
+  <!-- wordmark -->
+  <text class="t" x="64" y="118" font-size="62" font-weight="800" fill="#e6edf3">andersonmelo<tspan fill="#34d399">-seo</tspan></text>
+  <text class="t" x="66" y="162" font-size="25" font-weight="500" fill="#8b9bb4">SEO de elite para Claude Code</text>
+
+  <!-- value prop -->
+  <text class="t" x="66" y="214" font-size="26" font-weight="700" fill="#2dd4bf">um consultor sênior que audita e constrói</text>
+
+  <!-- keyword strip -->
+  <text class="t" x="66" y="262" font-size="16.5" font-weight="500" fill="#aab6cc" letter-spacing="0.3">topical authority &#160;·&#160; information gain &#160;·&#160; schema / knowledge graph &#160;·&#160; programmatic em escala</text>
+  <text class="t" x="66" y="288" font-size="16.5" font-weight="500" fill="#aab6cc" letter-spacing="0.3">GEO / AEO / LLMO &#160;·&#160; Core Web Vitals &#160;·&#160; rank-and-rent local &#160;·&#160; nunca alucina métrica</text>
+
+  <!-- footer -->
+  <text class="t" x="66" y="332" font-size="14" font-weight="500" fill="#5d6b86">Anderson Melo · andersonmeloseo.com.br · MIT · 1 orquestrador + 8 sub-skills</text>
+</svg>
