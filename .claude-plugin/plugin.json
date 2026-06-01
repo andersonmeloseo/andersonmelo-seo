@@ -1,6 +1,6 @@
 {
   "name": "andersonmelo-seo",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "SEO de elite para Claude Code: um consultor sênior que diagnostica e constrói. Auditoria técnica e semântica, topical authority (Koray), knowledge graph e entidades (Dixon Jones), Information Gain, on-page e content briefs, schema/JSON-LD, SEO programático em escala com travas anti-thin/near-duplicate, rank-and-rent local, HTML5 semântico, performance Lighthouse 100 e GEO/AEO/LLMO para AI Search. Opera em 2 modos (Execução com dados / Framework sem dados) e nunca apresenta estimativa como medição. 1 orquestrador + 8 sub-skills, em português.",
   "author": {
     "name": "Anderson Melo",

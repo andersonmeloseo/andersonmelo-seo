@@ -2,7 +2,7 @@
 name: seo-on-page
 description: Otimização on-page de uma página/URL e geração de content brief competitivo. Use quando o usuário pedir "otimizar essa página", "analisa essa URL", "content brief", "brief de conteúdo", "como melhorar esse artigo", "on-page dessa página", "essa página não rankeia", ou "revisar headings e título".
 user-invokable: true
-argument-hint: "[url|tópico]"
+argument-hint: "[url para análise | tópico para brief]"
 license: MIT
 metadata:
   author: Anderson Melo
@@ -25,6 +25,8 @@ Declare qual modo está ativo antes de qualquer diagnóstico ou entrega.
 
 Antes de olhar um único heading ou meta tag, responda:
 
+> **Mitos a rejeitar:** "Keyword density" não é métrica-alvo — não existe valor ideal de frequência de termo. "LSI keywords" é mito de marketing (o Google não usa o algoritmo LSI). O que conta é cobertura de entidades e satisfação de intenção. Se o usuário pedir "densidade de keyword" ou "LSI keywords", reoriente para entidades e intenção.
+
 1. **Entidade central da página** — o que essa URL representa no grafo? Não o que o dono quer que ela seja, mas o que o Google interpreta a partir do conteúdo e dos sinais externos. Uma página sobre "instalação de ar-condicionado em São Paulo" tem como entidade o serviço, com atributos de localização e tipo de equipamento — não é um artigo de blog genérico sobre ar-condicionado.
 2. **Intenção de busca real** — qual o tipo dominante (informacional, navegacional, comercial, transacional) e qual a intenção latente por trás da query? A intenção real é o que os primeiros resultados orgânicos entregam, não o que a keyword sugere literalmente. Uma página que não casa com a intenção real não rankeia por mais on-page que tenha.
 3. **Qual página deveria existir aqui?** — às vezes o problema não é a otimização da página atual, é que a página atual não deveria existir nesta URL com este escopo. Se for este o caso, diga antes de qualquer outra análise.
@@ -44,6 +46,7 @@ Acesse a URL via WebFetch e extraia:
 - Hierarquia de headings — H2, H3, H4 na sequência em que aparecem; anote pulos de nível
 - Primeiras 80 palavras do corpo — a resposta direta está aqui? A intenção é satisfeita imediatamente?
 - Cobertura de entidades — quais entidades nomeadas aparecem? Quais estão ausentes e deveriam estar?
+- IG por seção — identifique qual tipo de Information Gain cada seção entrega e sinalize as seções com zero IG (é o critério mais discriminante de rankability)
 - Marcações semânticas presentes — `<mark>`, `<dfn>`, `<dl>/<dt>/<dd>`, `<time>`, `<cite>`, `<abbr>`
 - Schema JSON-LD — tipo(s) declarado(s), `@id`, propriedades presentes e ausentes
 - Links internos — âncoras, destinos; se há âncora genérica ("clique aqui", "saiba mais")
@@ -59,15 +62,17 @@ Organize por criticidade:
 
 **Alto impacto** — prejudica ranking significativamente (title fora do intervalo 50-60 caracteres ou sem keyword no início; headings pulando nível H2→H4; entidades-chave ausentes do corpo; links internos com âncora genérica ou repetida).
 
-**Melhoria incremental** — não bloqueia, mas reduz potencial (description fora do intervalo 140-155; ausência de `<mark>` em dados/estatísticas; `<dfn>` faltando na primeira menção de termo técnico; FAQ ausente quando a SERP mostra "People Also Ask").
+**Alto impacto** — também inclui: FAQ ausente quando a SERP-alvo mostra "People Also Ask" (o Google sinalizou que o formato Q&A satisfaz a intenção — ausência de FAQ nesse contexto é oportunidade de snippet e citação perdida).
+
+**Melhoria incremental** — não bloqueia, mas reduz potencial (description fora do intervalo 140-155; ausência de `<mark>` em dados/estatísticas; `<dfn>` faltando na primeira menção de termo técnico).
 
 ### 3. Checklist on-page operacional
 
 Este checklist **não é uma lista de requisitos empilhados** — cada item existe porque afeta como o Google e os LLMs entendem e rankeiam a página. Entenda o porquê de cada um.
 
-**Title (50-60 caracteres):** o Google exibe ~600px; fora dessa janela, trunca ou reescreve. A keyword principal deve aparecer antes da vírgula ou do pipe — é o sinal mais pesado de relevância na tag.
+**Title (50-60 caracteres):** o Google exibe ~580px na prática; mantenha 50-60 caracteres para exibição integral em todos os dispositivos — fora dessa janela, trunca ou reescreve. A keyword principal deve aparecer no INÍCIO do title (primeiros ~28-30 caracteres) — é o sinal mais pesado de relevância na tag; não depende de vírgula ou pipe.
 
-**Description (140-155 caracteres):** não é fator de ranking direto, mas taxa de clique (CTR) é. Uma description que reproduz a resposta da intenção e tem call-to-action claro eleva CTR e, indiretamente, sinaliza relevância por comportamento.
+**Description (140-155 caracteres):** não é fator de ranking direto, mas taxa de clique (CTR) é. Uma description que reproduz a resposta da intenção e tem call-to-action claro eleva CTR e, indiretamente, sinaliza relevância por comportamento. Em mobile o corte ocorre antes (~120 caracteres) — coloque o essencial no começo.
 
 **Um único H1 com keyword:** múltiplos H1 diluem o sinal de tópico principal. H1 sem keyword é oportunidade desperdiçada. O H1 não precisa ser idêntico ao title — pode ser uma variação semântica.
 
@@ -121,6 +126,7 @@ Tipo primário, propriedades obrigatórias e a relação com o `@graph` do site 
 
 **7. Contagem-alvo de palavras**
 Conforme o tipo de página definido em `../seo/references/padroes-de-producao.md`:
+- Página programática: ~600 palavras mínimo com variação semântica real por página
 - Página de serviço: 1.200 palavras
 - Cluster: 1.500 palavras
 - Hub: 2.000 palavras

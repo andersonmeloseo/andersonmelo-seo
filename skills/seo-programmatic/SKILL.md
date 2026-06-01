@@ -30,12 +30,23 @@ finanças e jurídico.
 
 O problema não é escala em si. É escala **sem razão de existir por página**. Uma página que
 apenas troca "São Paulo" por "Campinas" no template, sem nenhum dado diferente, não ajuda
-ninguém a encontrar o que precisa. O Google detecta isso via similaridade de conteúdo,
-via comportamento do usuário e via análise de padrões no dataset de treinamento.
+ninguém a encontrar o que precisa. O Google detecta isso via similaridade de conteúdo
+e via comportamento do usuário. (A hipótese de detecção "via análise de padrões no dataset
+de treinamento" é especulativa — não há confirmação pública do Google; mantenha apenas
+os vetores documentados acima.)
 
 A pergunta que esta skill sempre faz antes de gerar: **o que esta página sabe que a
 página-irmã não sabe?** Se a resposta for "nada além do nome da cidade", há um problema
 de dataset para resolver antes de um problema de template para escrever.
+
+**Duas categorias distintas de spam de conteúdo (update Google mar/2024):** o update
+distingue (a) *scaled content abuse* — conteúdo em massa gerado sem valor por página,
+independente de quem publica — e (b) *site reputation abuse* / "parasite SEO" — terceiros
+publicando conteúdo em domínio autoritativo para alavancar o ranking do domínio hospedeiro,
+sem relação editorial com ele. Para quem opera rank-and-rent com conteúdo de parceiros, a
+categoria (b) é diretamente relevante: verifique se o conteúdo do parceiro passa pelo mesmo
+crivo editorial do domínio, ou se é conteúdo externo sendo "parasitado" sobre a autoridade
+acumulada.
 
 ---
 
@@ -118,6 +129,7 @@ comparando amostras) qual porcentagem do conteúdo do `<main>` varia entre pági
 
 Alvo mínimo de variação: **≥ 30% do conteúdo do `<main>` deve ser único por página**,
 descontando header, footer, nav e componentes estruturais fixos.
+[heurística operacional desta skill — o Google não publica threshold percentual de unicidade]
 
 Se o dataset só suporta 10-15% de variação (nome da cidade + slug), o template está
 thin por design. A solução não é escrever mais texto estático — é enriquecer o dataset
@@ -131,6 +143,15 @@ Estratégias de variação que funcionam:
 - Seção "Cidades atendidas na região" com as cidades vizinhas (campo `neighbors`)
 - FAQ com perguntas geradas dinamicamente a partir de modificadores do serviço
 - Trust signals locais: associação de classe regional, sindicato patronal, vigilância sanitária
+
+### Passo 3.5 — Validar amostra antes do 1º lote
+
+Antes de gerar o primeiro lote completo, gere **1 página de amostra por variação
+geográfica/de dataset** presente no escopo (ex.: uma cidade grande, uma pequena, um
+modificador diferente) e valide manualmente: canonical correto, schema sem erros,
+dados locais reais preenchidos (não placeholders), hierarquia de headings, breadcrumb.
+Somente após aprovação da amostra, escale. Um erro de template multiplicado por 50
+gera 50 páginas ruins — corrigi-las depois custa mais do que validar antes.
 
 ### Passo 4 — Gerar em lotes
 
@@ -147,7 +168,12 @@ despercebido em lote de 50 não precisa ser corrigido em 10.000.
 ### Passo 5 — Aplicar `noindex` em páginas sem variação suficiente
 
 Qualquer página que, após geração, apresente menos de **~20% de conteúdo único no `<main>`**
-recebe `<meta name="robots" content="noindex, follow">` e é excluída do sitemap.
+deve ser sinalizada para revisão.
+[heurística operacional desta skill — o Google não publica threshold percentual de unicidade]
+Use essa heurística como **gatilho de revisão, não como corte automático** — a decisão de
+`noindex` é qualitativa: a página tem razão de existir e dado único suficiente? Se sim,
+enriqueça o dataset antes de aplicar `noindex`. Se não, aplique `<meta name="robots"
+content="noindex, follow">` e exclua do sitemap.
 
 Isso não é punição — é higiene de índice. Páginas `noindex` podem existir por razões
 operacionais (área de serviço que o cliente atende mas onde não tem histórico nem dados).
@@ -178,6 +204,11 @@ Padrões recomendados por tipo de página:
 Evite incluir o estado como nível separado quando a cidade já é única no dataset. Cria
 profundidade sem valor.
 
+**Trailing slash:** defina trailing slash (com ou sem) de forma consistente em todo o site
+e garanta que o `canonical` reflita o padrão escolhido. Inconsistência gera duplicatas
+indexadas silenciosamente em escala — o que em 10 páginas é ruído, em 10.000 é problema
+grave de index bloat.
+
 ---
 
 ## Sitemap segmentado
@@ -196,6 +227,9 @@ rastreamento. Segmente por tipo:
 
 Limite de 50.000 URLs por arquivo de sitemap (regra do protocolo). Use `<lastmod>` apenas
 quando a data refletir uma mudança real — datas falsas degradam a confiança do bot.
+**Em SSG que regenera tudo a cada build, NÃO use a data do build como `<lastmod>`** — use
+a data da última mudança real no dataset ou no conteúdo daquela página específica; caso
+contrário, todo rebuild sinaliza "atualização" em milhares de URLs sem que nada tenha mudado.
 
 Não inclua no sitemap páginas com `noindex`. O Google ignora a contradição (indexar via
 sitemap e noindex via meta), mas é sinal de desorganização que aparece no GSC.
@@ -250,7 +284,7 @@ O controle de qualidade muda conforme o volume. Estas são as paradas obrigatór
 |---|---|
 | 1–29 | Gera normalmente; aplica checklist de `padroes-de-producao.md` em cada página. |
 | 30–49 | Avisa o operador que está entrando em escala intermediária; confirma que o dataset tem variação suficiente para o lote. |
-| 50+ | **Exige** justificativa explícita de unicidade: qual campo do dataset diferencia cada página? Se o operador não souber responder, entra em Modo Framework antes de continuar. |
+| 50+ | **Exige** verificação de unicidade baseada em evidência no dataset (inspecione o arquivo/estrutura real — não confie só na declaração verbal do operador): qual campo do dataset diferencia cada página, e esse campo está efetivamente preenchido e variando? Se a resposta não estiver verificável no dataset, entra em Modo Framework antes de continuar. |
 | 500+ | Solicita amostragem: 10 páginas aleatórias do lote para revisão de variação antes de gerar o restante. |
 | 5.000+ | O dataset **é** a justificativa — confirme qual arquivo de dados está sendo usado, qual versão, e quantos campos de IG ele contém. Registre isso no relatório. |
 
@@ -276,7 +310,11 @@ Se o nicho é regulado (médico, advogado, engenheiro), use o subtipo correto
 são perguntas genéricas — úteis, mas não IG.
 
 O `aggregateRating` segue a política definida em `../seo/references/padroes-de-producao.md`
-seção 6. Esta skill não sobrescreve aquela política.
+seção 6. Esta skill não sobrescreve aquela política — mas reforça o risco inline porque
+em programmatic a amplitude é outra: **marcar a mesma nota em milhares de páginas de cidade
+é padrão clássico de structured-data spam**; o Google identifica o padrão repetitivo
+exatamente porque é sistemático. Só marque `aggregateRating` onde há reviews reais
+associados àquela página específica — nunca como campo fixo no template.
 
 ---
 

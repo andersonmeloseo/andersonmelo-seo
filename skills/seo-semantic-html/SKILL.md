@@ -6,7 +6,7 @@ argument-hint: "[url|tipo de página]"
 license: MIT
 metadata:
   author: Anderson Melo
-  version: "0.1.0"
+  version: "0.2.0"
   category: seo
 ---
 
@@ -24,16 +24,13 @@ e o que coletar). Nunca misture os dois sem deixar claro a fronteira.
 
 ## Por que a marcação importa para ranqueamento
 
-Googlebot e os LLMs que alimentam AI Overviews não "veem" a página — eles processam o DOM.
-Uma `<div class="article">` e um `<article>` podem renderizar idênticos ao usuário, mas para
-o parser semântico a segunda carrega o sinal "este é o conteúdo principal autossuficiente";
-a primeira é ruído estrutural. Multiplicado por milhares de páginas, esse ruído degrada o
-entendimento da entidade e o topical authority do domínio.
+`<div class="article">` e `<article>` renderizam igual ao usuário; para o parser do Googlebot
+e dos LLMs de AI Overviews, a segunda carrega o sinal "conteúdo principal autossuficiente" e
+a primeira é ruído. Em escala (milhares de páginas), esse ruído degrada entendimento de entidade
+e topical authority.
 
-Além disso, Core Web Vitals são fator de desempate de ranking confirmado desde 2021 —
-e continuam sendo sinal de qualidade na era de AI Search. LCP ruim significa que o crawler
-espera. CLS alto sinaliza instabilidade. INP alto penaliza UX em campo (CrUX). Os três têm
-raiz na marcação: dimensões ausentes, JS bloqueante, preload faltando.
+CWV integram o ranking signal de Page Experience (não são só desempate) — LCP, CLS e INP têm
+raiz na marcação. Limiares e metas de bundle: `../seo/references/padroes-de-producao.md` §5.
 
 ---
 
@@ -48,10 +45,24 @@ raiz na marcação: dimensões ausentes, JS bloqueante, preload faltando.
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Keyword Principal · Marca</title>
+
   <!-- LCP: preload do herói antes de qualquer outra coisa -->
-  <link rel="preload" as="image" href="/img/hero.avif" fetchpriority="high"
+  <!-- type="image/avif" permite que browsers sem suporte ignorem e usem fallback -->
+  <link rel="preload" as="image" type="image/avif"
+        href="/img/hero.avif"
         imagesrcset="/img/hero-480.avif 480w, /img/hero-960.avif 960w"
-        imagesizes="100vw">
+        imagesizes="100vw"
+        fetchpriority="high">
+
+  <!-- speakable: SOMENTE via JSON-LD (Google não suporta microdata para SpeakableSpecification) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SpeakableSpecification",
+    "cssSelector": ".summary"
+  }
+  </script>
+
   <!-- CSS crítico inline (≤14KB) -->
   <style>/* critical CSS aqui */</style>
   <!-- CSS restante async -->
@@ -82,8 +93,8 @@ raiz na marcação: dimensões ausentes, JS bloqueante, preload faltando.
     <article>
       <header>
         <h1>Título com a keyword principal</h1>
-        <!-- resumo executivo com speakable -->
-        <p class="summary" itemscope itemtype="https://schema.org/SpeakableSpecification">
+        <!-- classe .summary é o alvo do cssSelector do SpeakableSpecification acima -->
+        <p class="summary">
           Resposta direta à query em 60–80 palavras. Sem enrolação.
         </p>
         <address>
@@ -92,13 +103,14 @@ raiz na marcação: dimensões ausentes, JS bloqueante, preload faltando.
         <time datetime="2026-06-01">1 de junho de 2026</time>
       </header>
 
-      <!-- imagem do herói fora do preload: dimensões fixas para CLS = 0 -->
+      <!-- herói: sem fetchpriority no <img> — o preload acima já garante prioridade -->
+      <!-- width/height obrigatórios para CLS = 0 -->
       <figure>
         <picture>
           <source type="image/avif" srcset="/img/hero-480.avif 480w, /img/hero-960.avif 960w">
           <source type="image/webp" srcset="/img/hero-480.webp 480w, /img/hero-960.webp 960w">
           <img src="/img/hero-960.jpg" alt="Descrição informativa da imagem"
-               width="960" height="540" fetchpriority="high">
+               width="960" height="540">
         </picture>
         <figcaption>Legenda contextual com entidade nomeada.</figcaption>
       </figure>
@@ -106,7 +118,6 @@ raiz na marcação: dimensões ausentes, JS bloqueante, preload faltando.
       <section aria-labelledby="secao-conceito">
         <h2 id="secao-conceito">O que é [conceito central]?</h2>
         <p>…</p>
-        <!-- termos técnicos na primeira menção -->
         <p><dfn>Core Web Vitals</dfn> são as três métricas de experiência do usuário…</p>
       </section>
 
@@ -117,6 +128,7 @@ raiz na marcação: dimensões ausentes, JS bloqueante, preload faltando.
         <p>…</p>
       </section>
 
+      <!-- <aside> sem heading filho → aria-label; com heading filho → aria-labelledby -->
       <aside aria-label="Leitura relacionada">
         <!-- links internos tangenciais ao tema principal -->
       </aside>
@@ -136,51 +148,29 @@ raiz na marcação: dimensões ausentes, JS bloqueante, preload faltando.
 
 ### Página de serviço/local (service page, rank-and-rent, programmatic)
 
-A diferença estrutural principal: `<article>` cede lugar a `<main>` direto com seções
-temáticas, pois o conteúdo não é um artigo autossuficiente — é a apresentação de uma
-oferta de serviço. Use `<address>` para NAP e `<section>` com heading próprio para cada
-bloco (benefícios, processo, área de cobertura, FAQ, reviews).
+Sem `<article>` — conteúdo não é autossuficiente. Use `<main>` + `<section aria-labelledby>` para
+cada bloco (benefícios, processo, área, FAQ, reviews) e `<address>` para NAP.
 
 ```html
 <main id="main-content">
-
-  <!-- herói: texto server-side, nunca via JS -->
   <section aria-labelledby="hero-heading" class="hero">
     <h1 id="hero-heading">Eletricista em São Paulo — Emergência 24h</h1>
-    <p>Descrição direta do serviço e diferencial em 1–2 frases.</p>
+    <p>Descrição direta + diferencial em 1–2 frases.</p>
     <a href="#contato">Solicitar orçamento</a>
   </section>
-
   <section aria-labelledby="beneficios-heading">
     <h2 id="beneficios-heading">Por que escolher nosso serviço</h2>
-    <ul>
-      <li>…</li>
-    </ul>
+    <ul>…</ul>
   </section>
-
-  <section aria-labelledby="processo-heading">
-    <h2 id="processo-heading">Como funciona o atendimento</h2>
-    <ol>…</ol>
-  </section>
-
-  <section aria-labelledby="area-heading">
-    <h2 id="area-heading">Área de cobertura</h2>
-    <!-- lista de bairros/cidades com links internos -->
-  </section>
-
   <section aria-labelledby="faq-heading">
     <h2 id="faq-heading">Perguntas frequentes</h2>
-    <!-- cada item: <details><summary>Pergunta</summary><p>Resposta</p></details>
-         ou marcação explícita + FAQPage JSON-LD -->
+    <!-- <details><summary>Pergunta</summary><p>Resposta</p></details> + FAQPage JSON-LD -->
   </section>
-
-  <!-- NAP estruturado -->
   <address>
     <strong>Elétrica Exemplo Ltda.</strong><br>
     Rua das Flores, 123 — São Paulo, SP 01310-100<br>
     <a href="tel:+551140041234">(11) 4004-1234</a>
   </address>
-
 </main>
 ```
 
@@ -188,8 +178,7 @@ bloco (benefícios, processo, área de cobertura, FAQ, reviews).
 
 ## Hierarquia de headings: certa vs errada
 
-O Google usa a árvore de headings para entender a estrutura tópica da página. Pular nível
-sinaliza conteúdo mal organizado; heading longo demais desperdiça sinal de keyword.
+Pular nível sinaliza conteúdo mal organizado; heading longo demais desperdiça sinal de keyword.
 
 **Errado — dois erros clássicos:**
 ```
@@ -218,63 +207,57 @@ Cada H2 funciona como chunk independente: se extraído pelo LLM, faz sentido soz
 
 ## Landmarks e ARIA mínimos
 
-Elementos HTML5 têm **roles implícitos**: `<header>` mapeia para `banner`, `<nav>` para
-`navigation`, `<main>` para `main`, `<footer>` para `contentinfo`, `<aside>` para
-`complementary`. Não duplique com `role="navigation"` num `<nav>` — é redundante.
+Roles implícitos: `<header>` = `banner`, `<nav>` = `navigation`, `<main>` = `main`,
+`<footer>` = `contentinfo`, `<aside>` = `complementary`. Não duplique com atributo `role`
+explícito nesses elementos.
 
 O que adicionar explicitamente:
 
-- `aria-label` em cada `<nav>` quando há mais de uma na página (ex: "Navegação principal",
-  "Breadcrumb", "Navegação do rodapé"). Sem isso, leitores de tela anunciam "navigation"
-  repetido sem diferenciação.
-- `aria-labelledby="id-do-heading"` em `<section>` e `<aside>` sem heading de label óbvio.
-- Skip link visível ao foco: `<a href="#main-content" class="skip-link">` posicionado como
-  primeiro filho do `<body>`. Usuários de teclado e leitores de tela dependem dele para não
-  repetir toda a navegação a cada página.
+- `aria-label` em cada `<nav>` quando há mais de uma (ex: "Navegação principal", "Breadcrumb",
+  "Rodapé") — sem isso leitores de tela anunciam "navigation" repetido.
+- `<section>`/`<aside>` **com heading filho** → `aria-labelledby="id-do-heading"`; **sem
+  heading filho** → `aria-label="descrição curta"`.
+- Skip link como primeiro filho do `<body>`: `<a href="#main-content" class="skip-link">`.
 - `aria-current="page"` no item de breadcrumb e no link ativo do menu.
 
-O que **não** fazer: `role="button"` num `<a>` que navega (use `<a>`); `role="article"` num
-`<div>` quando você pode usar `<article>`; `aria-hidden="true"` em conteúdo que precisa ser
-lido.
+**Não fazer**: `role="button"` em `<a>` que navega; `role="article"` em `<div>` quando cabe
+`<article>`; `aria-hidden="true"` em conteúdo que precisa ser lido.
 
 ---
 
 ## Core Web Vitals na marcação (snippets operacionais)
 
-### LCP < 2,0s — herói carregado antes de tudo
+Ver definições completas e limiares de campo (CrUX) em `../seo/references/padroes-de-producao.md` §5.
 
-O LCP candidate típico é a imagem do herói. O browser precisa descobri-la o mais cedo
-possível no HTML — não via CSS `background-image` (invisível para o preload scanner) e não
-via JS (tarde demais).
+### LCP — alvo < 2,0s em lab; limiar 'Good' de campo (CrUX) = 2,5s
+
+LCP candidate típico = imagem do herói. Descoberta via preload no `<head>` — CSS
+`background-image` e JS são tarde demais para o preload scanner.
 
 ```html
 <!-- No <head>, ANTES de qualquer folha de estilos -->
-<link rel="preload" as="image"
+<!-- type="image/avif": browsers sem suporte ignoram este preload e usam o fallback do <picture> -->
+<link rel="preload" as="image" type="image/avif"
       href="/img/hero.avif"
       imagesrcset="/img/hero-480.avif 480w, /img/hero-1200.avif 1200w"
       imagesizes="(max-width: 600px) 100vw, 1200px"
       fetchpriority="high">
 ```
 
-CSS crítico inline evita render-blocking; limite de ~14KB mantém o first byte rápido.
-Tudo acima da dobra server-side: o título do herói nunca pode depender de JS para aparecer.
+CSS crítico inline (≤14KB); título do herói sempre server-side (nunca depende de JS).
 
 ### CLS = 0 — dimensões em toda mídia
 
-CLS de 0 começa com `width` e `height` declarados em toda imagem, vídeo e iframe — o
-browser reserva o espaço antes de carregar o recurso.
+`width`/`height` em toda imagem, vídeo e iframe — o browser reserva espaço antes de carregar.
+Containers dinâmicos (banner, embed): `min-height` fixo no CSS.
 
 ```html
-<!-- width/height obrigatórios: evitam reflow quando a imagem carrega -->
 <img src="/img/foto.avif" alt="Descrição" width="800" height="450"
      loading="lazy" decoding="async">
-
-<!-- Container dinâmico (ex: banner de anúncio, embed): reserve altura mínima -->
 <div style="min-height: 90px;" class="ad-slot">…</div>
 ```
 
-Para fontes customizadas: `font-display: swap` previne FOIT; `size-adjust` na regra
-`@font-face` da fallback elimina o shift de layout quando a webfont substitui a fallback.
+Fontes: `font-display: swap` previne FOIT; `size-adjust` na fallback elimina shift.
 
 ```css
 @font-face {
@@ -283,19 +266,26 @@ Para fontes customizadas: `font-display: swap` previne FOIT; `size-adjust` na re
   font-display: swap;
 }
 
-/* fallback com size-adjust calibrado para zero shift */
+/* fallback calibrada para zero shift */
+/* AVISO: os valores abaixo são ilustrativos — calcule para a sua fonte específica
+   com Font Style Matcher (https://meowni.ca/font-style-matcher/) antes de aplicar.
+   Valores errados INTRODUZEM CLS em vez de eliminá-lo. */
 @font-face {
   font-family: 'MinhaFonte-Fallback';
   src: local('Arial');
-  size-adjust: 106%;
-  ascent-override: 90%;
+  size-adjust: 106%;       /* ilustrativo */
+  ascent-override: 90%;    /* ilustrativo */
 }
 ```
 
-### INP < 200ms — zero JS bloqueante
+### INP < 200ms — zero JS bloqueante + long tasks quebradas
 
-INP mede o tempo de resposta à primeira interação do usuário. A receita é simples: nenhum
-script no caminho crítico de renderização.
+INP mede o **pior tempo de resposta entre TODAS as interações da sessão (P98)** — não
+apenas a primeira. É o sucessor do FID (descontinuado).
+
+`defer` reduz bloqueio no carregamento mas **não resolve INP de event handlers caros**.
+Para INP, quebre long tasks com `scheduler.yield()` (ou `setTimeout(0)`) e evite layout
+thrashing (ler e escrever o DOM no mesmo frame).
 
 ```html
 <!-- Scripts não críticos: defer (mantém ordem, executa após parse) -->
@@ -315,24 +305,21 @@ script no caminho crítico de renderização.
 </script>
 ```
 
-Embeds de vídeo (YouTube, Vimeo): use facade (poster image estático + load on click).
-O iframe real carrega só quando o usuário interage, poupando ~500KB de JS de terceiros.
+Embeds de vídeo: facade (poster estático + load on click) — iframe real só na interação, poupa ~500KB de JS de terceiros.
 
 ---
 
 ## Imagens: `<picture>` com AVIF + WebP
 
-AVIF entrega 40–50% menos bytes que JPEG equivalente. Sempre ofereça fallback para
-browsers mais antigos via `<picture>`.
+AVIF entrega 40–50% menos bytes que JPEG; suporte atual: [caniuse.com/avif](https://caniuse.com/avif).
+Fallback obrigatório via `<picture>`.
 
 ```html
 <picture>
-  <!-- AVIF: suporte ~90% dos browsers modernos -->
   <source
     type="image/avif"
     srcset="/img/produto-400.avif 400w, /img/produto-800.avif 800w, /img/produto-1200.avif 1200w"
     sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 800px">
-  <!-- WebP: fallback para browsers sem AVIF -->
   <source
     type="image/webp"
     srcset="/img/produto-400.webp 400w, /img/produto-800.webp 800w, /img/produto-1200.webp 1200w"
@@ -348,58 +335,44 @@ browsers mais antigos via `<picture>`.
 
 Regra de `alt`: imagem informativa → alt descritivo com entidade nomeada e contexto. Imagem
 decorativa (separador, ícone sem semântica) → `alt=""` para que leitores de tela a ignorem.
-`alt` vazio sem aspas (`alt` ausente) é erro de acessibilidade — diferente de `alt=""`.
+`alt` ausente (sem atributo) é erro de acessibilidade — diferente de `alt=""`.
 
 ---
 
 ## Auditar uma página (Modo Execução)
 
-Quando a URL ou o HTML-fonte for fornecido, siga esta ordem de verificação:
+Ordem de verificação — para cada achado: trecho exato, impacto e correção precisa.
 
-1. **Tags semânticas**: o conteúdo principal está em `<article>` ou `<main>`? Há `<div>`
-   substituindo `<section>`, `<aside>`, `<nav>`? Liste cada ocorrência com o trecho do HTML.
-
-2. **Hierarquia de headings**: há exatamente 1 `<h1>`? Algum nível foi pulado? Algum heading
-   ultrapassa 68 caracteres? Extraia a árvore e mostre.
-
-3. **LCP candidate**: qual elemento o browser elege como LCP? Há `<link rel="preload"
-   fetchpriority="high">` para ele no `<head>`? O CSS crítico está inline? O texto do herói
-   é server-side ou depende de JS?
-
-4. **JS bloqueante**: há `<script src>` sem `defer`/`async` antes do `</body>`? Algum script
-   de terceiro (analytics, chat, pixel) carrega no `<head>` sem estratégia de lazy load?
-
-5. **Fontes**: estão self-hosted (woff2 local) ou chamando Google Fonts CDN? `font-display:
-   swap` declarado? `size-adjust` configurado na fallback?
-
-6. **Imagens**: todas têm `width` e `height`? LCP image usa AVIF? Imagens abaixo da dobra
-   têm `loading="lazy"`? `alt` descritivo (informativas) ou `alt=""` (decorativas)?
-
-7. **Landmarks e ARIA**: há skip link? Múltiplas `<nav>` com `aria-label` distintos?
-   `aria-current="page"` no breadcrumb?
-
-Para cada achado, cite o trecho exato, o impacto (LCP, CLS, INP, acessibilidade, semântica)
-e a correção precisa.
+1. **Tags semânticas**: conteúdo principal em `<article>`/`<main>`? `<div>` substituindo
+   `<section>`, `<aside>`, `<nav>`?
+2. **Headings**: exatamente 1 `<h1>`? Nível pulado? Heading > 68 chars? Extraia a árvore.
+3. **LCP**: preload `<link rel="preload" as="image" type="image/avif" fetchpriority="high">`
+   no `<head>`? `<img>` do herói tem `fetchpriority="high"` duplicando o preload (remover)?
+   Título server-side (não via JS)?
+4. **JS/INP**: `<script src>` sem `defer`/`async`? Third-party no `<head>` sem lazy load?
+   Event handlers com long tasks (> 50ms) ou layout thrashing?
+5. **Fontes**: self-hosted woff2? `font-display: swap`? `size-adjust` calibrado na fallback?
+6. **Imagens**: `width`/`height` em todas? LCP usa AVIF? `loading="lazy"` abaixo da dobra?
+   `alt` descritivo ou `alt=""` correto?
+7. **ARIA**: skip link? Múltiplas `<nav>` com `aria-label` distintos? `aria-labelledby` onde
+   há heading filho; `aria-label` onde não há? `aria-current="page"` no breadcrumb?
+8. **speakable**: `SpeakableSpecification` via microdata (`itemscope`/`itemtype` no HTML) →
+   erro grave; Google só aceita via JSON-LD com `cssSelector`.
 
 ---
 
 ## Validação: o que "aprovado" significa
 
-| Ferramenta | Critério de aprovação |
+| Ferramenta | Critério |
 |---|---|
-| validator.w3.org | Zero erros (warnings aceitáveis se justificados) |
-| Lighthouse (desktop e mobile) | 100 / 100 / 100 / 100 |
-| axe DevTools | Zero violações de acessibilidade |
-| CrUX (Search Console) | LCP < 2,5s · CLS < 0,1 · INP < 200ms em campo |
-| PageSpeed Insights | LCP < 2,0s · CLS = 0 · INP < 200ms (lab) |
+| validator.w3.org | Zero erros |
+| Lighthouse desktop + mobile | 100 / 100 / 100 / 100 |
+| axe DevTools | Zero violações |
+| PageSpeed Insights (lab) | LCP < 2,0s · CLS = 0 · INP < 200ms |
+| CrUX / Search Console (campo) | LCP < 2,5s · CLS < 0,1 · INP < 200ms |
 
-Lab (Lighthouse, PageSpeed) confirma a implementação; campo (CrUX) confirma que usuários
-reais experimentam o resultado. Lab perfeito com campo ruim aponta throttling de rede,
-latência de servidor ou third-party carregado tarde o suficiente para passar no lab mas
-não no mundo real. Ambos precisam estar verdes.
-
-Os limiares completos de performance, bundle e servidor estão em
-`../seo/references/padroes-de-producao.md` §5.
+Lab perfeito + campo ruim → throttling de rede, TTFB alto ou third-party fora da janela
+de lab. Ambos precisam estar verdes.
 
 ---
 

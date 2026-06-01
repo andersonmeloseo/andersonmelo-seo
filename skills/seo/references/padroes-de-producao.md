@@ -79,7 +79,7 @@ de texto editorial único por página — confirme qual dataset diferencia cada 
 
 ## 5. Performance (alvo Lighthouse 100)
 
-- **LCP < 2,0s:** herói em AVIF com dimensões fixas e `<link rel="preload" as="image" fetchpriority="high">`;
+- **LCP < 2,0s** (alvo de lab; limiar "Good" de campo/CrUX do Google = 2,5s)**:** herói em AVIF com dimensões fixas e `<link rel="preload" as="image" type="image/avif" fetchpriority="high">`;
   texto do herói 100% server-side; CSS crítico inline (até ~14KB), resto async.
 - **CLS = 0:** `width`/`height` em imagens, vídeos, iframes; `min-height` em containers
   dinâmicos; `font-display: swap` + `size-adjust`.

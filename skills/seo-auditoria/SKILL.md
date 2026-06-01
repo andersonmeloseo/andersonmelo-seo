@@ -63,6 +63,8 @@ O que investigar: há topical map explícito? A estrutura de conteúdo cobre as 
 ### Camada 5 — On-page
 O que investigar por página amostrada: title (50-60 caracteres, keyword principal, diferenciador); meta description (140-155, call-to-action implícito); H1 único e alinhado com a intenção da query; hierarquia de headings sem pulos; primeiros 80 termos respondem a query diretamente; entidades nomeadas no corpo; schema presente e correto; links internos com âncoras variadas e semânticas; ausência de clichês e conteúdo de enchimento. Para cada problema encontrado, anote a URL e o dado exato — não generalize.
 
+> **Nota sobre schema via WebFetch:** WebFetch e conversões para markdown frequentemente NÃO retornam os blocos `application/ld+json`. Antes de concluir "schema ausente", confirme via fetch do HTML cru (curl) ou pelo Rich Results Test — ausência no WebFetch não é evidência de ausência no site.
+
 ### Camada 6 — Qualidade (E-E-A-T)
 O que investigar: autoria identificável com nome real, bio, links para perfis verificáveis? Há experiência de primeira mão demonstrável (casos reais, dados próprios, fotos)? Em YMYL (saúde, finanças, direito, home services), a régua é máxima — conteúdo sem autoria identificável e sem dado primário é passivo de penalidade. Para sites locais, há sinais de negócio real (endereço, telefone, fotos, depoimentos com nome)? Consistência de NAP entre site e GBP?
 
@@ -70,9 +72,9 @@ O que investigar: autoria identificável com nome real, bio, links para perfis v
 O que investigar com dados disponíveis: perfil de links (se Ahrefs/Moz/Semrush fornecido — analise toxicidade, distribuição de anchor text, velocidade de crescimento); entidade no Knowledge Graph do Google (busca pelo nome da marca retorna painel de entidade?); menções de marca sem link; `sameAs` no schema apontando para perfis reais e ativos. Sem dados de backlinks fornecidos, declare a lacuna e o que ela impede de concluir — não estime métricas de DA/DR sem fonte.
 
 ### Camada 8 — Performance e Core Web Vitals
-O que investigar: se dados de campo (GSC, CrUX, PageSpeed Insights com dados reais) foram fornecidos, use-os — são a única medição que conta para o Google. Se não foram, a análise de performance é estimada a partir do HTML coletado: presença de CSS crítico inline, imagens com dimensões declaradas, JS bloqueante no `<head>`, fontes via CDN externo, scripts de terceiros no carregamento inicial, preload do hero image. Declare explicitamente: "score de performance estimado — sem field data (CrUX/GSC) não é possível confirmar LCP, CLS ou INP reais."
+O que investigar: se dados de campo (GSC, CrUX, PageSpeed Insights com dados reais) foram fornecidos, use-os — dados de campo (CrUX) são o input de ranking; dados de lab (Lighthouse) são o fallback válido para páginas sem field data suficiente — declare qual dos dois está usando. Se não foram fornecidos dados de campo, a análise de performance é estimada a partir do HTML coletado: presença de CSS crítico inline, imagens com dimensões declaradas, JS bloqueante no `<head>`, fontes via CDN externo, scripts de terceiros no carregamento inicial, preload do hero image. Declare explicitamente: "score de performance estimado a partir de sinais de HTML/lab — sem field data (CrUX/GSC) não é possível confirmar LCP, CLS ou INP reais."
 
-Alvos: LCP < 2,5s · CLS < 0,1 · INP < 200ms. Os parâmetros técnicos de produção estão em `../seo/references/padroes-de-producao.md` §5.
+Alvos de CWV: LCP — limiar 'Good' de campo (CrUX) = 2,5s; alvo de produção/lab = 2,0s · CLS < 0,1 · INP < 200ms. Os parâmetros técnicos de produção estão em `../seo/references/padroes-de-producao.md` §5.
 
 ### Camada 9 — GEO/AEO (AI Search)
 O que investigar: crawlers de IA estão permitidos no robots.txt? Há `llms.txt` no domínio? O conteúdo usa estrutura que favorece citação (resumo executivo, `speakable`, parágrafos autossuficientes, entidades nomeadas, fontes com `<cite>`)? O site aparece em respostas de ChatGPT/Perplexity/AI Overviews para as queries principais? Esta camada é uma otimização sobre uma base orgânica sólida — se as camadas 1-5 têm problemas críticos, GEO é prematuro.
@@ -97,7 +99,7 @@ Cada problema identificado recebe quatro atributos antes de entrar no relatório
 | **Medium** | Otimização que melhora performance, CTR ou E-E-A-T. Resolve no próximo ciclo. |
 | **Low** | Backlog técnico ou editorial que agrega margem. Resolve quando houver capacidade. |
 
-Não infle a lista de Critical para parecer mais impactante. Um site com 8 Critical tem um problema grave; um com 30 Critical tem um consultor que não sabe priorizar.
+Não infle a lista de Critical para parecer mais impactante. Um site com 8 Critical tem um problema grave. Se a lista de Critical chegar a dezenas de itens, revise a classificação — provavelmente há itens Medium/Low promovidos demais.
 
 ---
 
@@ -116,7 +118,7 @@ O score é uma síntese ponderada, não uma média aritmética. Use os pesos aba
 
 Calcule cada dimensão de 0 a 100 com base nos achados, aplique o peso e some. O score final é orientativo — seu valor real está no detalhamento por dimensão, não no número isolado.
 
-**Transparência obrigatória:** se dados de campo (GSC, CrUX) estiverem ausentes, declare no score: "Dimensão de performance estimada a partir do HTML — score pode variar até ±15 pontos com dados reais de CrUX." Nunca apresente um score de 94 como medição precisa quando parte dele é estimativa.
+**Transparência obrigatória:** se dados de campo (GSC, CrUX) estiverem ausentes, declare no score: "O score de performance é estimado a partir de sinais de HTML/lab; com dados de campo (CrUX/GSC) pode variar de forma relevante — trate a dimensão de performance como estimada até confirmar com field data." Nunca apresente um score de 94 como medição precisa quando parte dele é estimativa.
 
 ---
 
@@ -124,9 +126,9 @@ Calcule cada dimensão de 0 a 100 com base nos achados, aplique o peso e some. O
 
 Quando o site tiver 30 ou mais páginas de localidade (cidade × serviço, bairro × categoria, etc.), emita o seguinte alerta antes de continuar:
 
-> **Alerta de escala:** este site tem [N] páginas de localidade. A partir de 30 páginas, o Google escrutina a unicidade de conteúdo por página. Páginas que apenas trocam o nome da cidade sem oferecer dado local diferenciado configuram *scaled content abuse* segundo as Search Quality Rater Guidelines — risco de ação manual.
+> **Alerta de escala:** este site tem [N] páginas de localidade. A partir de ~30 páginas *(heurística operacional desta skill — não é threshold oficial do Google; serve para disparar escrutínio de unicidade)*, o Google tende a escrutinar a unicidade de conteúdo por página. Páginas que apenas trocam o nome da cidade sem oferecer dado local diferenciado configuram *scaled content abuse* segundo as Search Quality Rater Guidelines — risco de ação manual.
 
-Se houver 50 ou mais páginas deste tipo, exija justificativa de unicidade antes de prosseguir: qual dado específico diferencia cada página? Faixas de preço locais, tempo médio de obra, exemplos de projetos na cidade, parceiros locais, regulamentações municipais? Se não houver resposta concreta, classifique o risco como Critical na dimensão de conteúdo/E-E-A-T.
+Se houver 50 ou mais páginas deste tipo *(mesmo critério — heurística operacional, não threshold oficial)*, exija justificativa de unicidade antes de prosseguir: qual dado específico diferencia cada página? Faixas de preço locais, tempo médio de obra, exemplos de projetos na cidade, parceiros locais, regulamentações municipais? Se não houver resposta concreta, classifique o risco como Critical na dimensão de conteúdo/E-E-A-T.
 
 ---
 
@@ -155,7 +157,7 @@ Uma ação única e específica que o usuário deve fazer amanhã. Não uma list
 
 **URL inacessível:** declare imediatamente. Não chute o conteúdo. Ofereça alternativas: cache do Google (`cache:[url]`), WebFetch com UA diferente, ou solicite ao usuário que cole o HTML ou forneça acesso.
 
-**Robots bloqueando o crawl:** documente como Critical se bloquear Googlebot. Se bloquear só crawlers de IA, documente como High na camada 9.
+**Robots bloqueando o crawl:** documente como Critical se bloquear Googlebot. Se bloquear só crawlers de IA (GPTBot, ClaudeBot, etc.), documente como Medium na camada 9 — bloquear AI crawlers não impacta ranking orgânico; o impacto é exclusivo de GEO/AEO. Classifique como High apenas se IA Search for canal prioritário declarado pelo cliente.
 
 **Rate limit:** reduza a amostra. Documente quais URLs ficaram de fora e o que isso limita na análise.
 

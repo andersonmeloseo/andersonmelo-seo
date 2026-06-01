@@ -54,20 +54,26 @@ O que rankeia bem tende a ser selecionado; páginas com schema bem estruturado,
 autoridade E-E-A-T da página pesa — é o mesmo sistema de qualidade do ranking.
 
 **ChatGPT Search** usa o índice do Bing para respostas em tempo real. Presença no Bing,
-dados de rastreamento do Bing Webmaster Tools e IndexNow são relevantes. O modelo
+dados de rastreamento do Bing Webmaster Tools são relevantes. O modelo
 tende a citar URLs com título claro, snippet limpo e estrutura de resposta direta.
+IndexNow acelera a indexação/descoberta de URLs novas no Bing e parceiros — NÃO
+aumenta autoridade nem peso de citação.
 
 **Perplexity** rasteia a web em tempo real e cita fontes visivelmente. Textos com
 afirmações objetivas e verificáveis, dados com `<mark>` e fontes com `<cite>` são extraídos
 com facilidade. A arquitetura do chunk importa: cada parágrafo precisa funcionar isolado.
 
-**Gemini** (fora do Google Search) opera com treinamento + acesso limitado à web,
-dependendo do contexto. Presença consolidada em múltiplas fontes, `sameAs` apontando
-perfis reais e consistência de entidade aumentam a probabilidade de menção correta.
+**Gemini** (app e API, fora do Google Search) tem acesso à web via tool-use/grounding
+no modo padrão em 2026; em contextos sem grounding ativo, o sinal de entidade/treinamento
+ainda pesa para a menção. Não o descreva como "acesso limitado". AI Overviews = Gemini
+DENTRO do Search (coberto acima); este ponto é sobre Gemini standalone. Presença
+consolidada em múltiplas fontes, `sameAs` apontando perfis reais e consistência de
+entidade aumentam a probabilidade de menção correta.
 
 **Claude** (Anthropic) opera predominantemente com conhecimento de treinamento, sem
-rastreamento em tempo real por padrão. Entidades com forte presença editorial na web
-— artigos, citações, Wikipedia, publicações setoriais — têm mais peso. A consistência
+rastreamento em tempo real por padrão (no modo padrão em meados de 2026; verifique a
+documentação atual — o comportamento muda). Entidades com forte presença editorial na
+web — artigos, citações, Wikipedia, publicações setoriais — têm mais peso. A consistência
 da entidade em múltiplas fontes é o sinal que importa aqui.
 
 ---
@@ -93,9 +99,11 @@ Para atingir isso:
 - **Entidades sempre nomeadas.** "A empresa" não é extraível. "A Anthropic" é.
   Nomes próprios, produtos, organizações e localizações — nunca pronome ambíguo.
 
-- **Dados em `<mark>`, termos em `<dfn>`, fontes em `<cite>`.**
+- **Dados em `<mark>`, termos em `<dfn>`, fontes em `<cite>`, definições em `<dl>/<dt>/<dd>`.**
   Marcação semântica sinaliza ao extrator o que é dado verificável, o que é definição
-  e o que tem fonte. Detalhes em `../seo/references/padroes-de-producao.md` §3.
+  e o que tem fonte. `<dl>/<dt>/<dd>` para listas de definição — padrões indicam que
+  LLMs extraem esse padrão com prioridade para pares termo-definição.
+  Detalhes em `../seo/references/padroes-de-producao.md` §3.
 
 ---
 
@@ -133,18 +141,23 @@ renderiza rich results de FAQPage** para a maioria dos sites comerciais — a ex
 páginas de governo e saúde. Isso não significa abandonar FAQPage.
 
 O schema FAQPage continua sendo o formato mais legível por IA para perguntas e respostas
-estruturadas. Perplexity, ChatGPT e Google AI Overviews extraem FAQs independentemente
-do rich result aparecer na SERP. Mantenha FAQPage pelo valor de GEO, com a expectativa
-clara de que não vai gerar snippet visual no Google para sites comerciais. Combine com
-`speakable` nas respostas para amplificar a citabilidade.
+estruturadas. Conteúdo de FAQ bem marcado em HTML visível é extraível por todos os
+motores; que o JSON-LD FAQPage especificamente seja lido por ChatGPT Search/Perplexity
+é provável mas não documentado oficialmente — mantenha o FAQ em HTML visível E o schema.
+Google AI Overviews alimenta-se do índice orgânico onde o schema pesa na extração de
+passagem. Mantenha FAQPage pelo valor de GEO, com a expectativa clara de que não vai
+gerar snippet visual no Google para sites comerciais. Combine com `speakable` nas
+respostas para amplificar a citabilidade.
 
 ---
 
 ## `/llms.txt`: a vitrine para crawlers de IA
 
 `/llms.txt` é um arquivo de texto simples na raiz do site que orienta os modelos sobre
-o que o site oferece e quais páginas são mais relevantes. Não é um padrão oficial, mas
-adoção crescente o torna um sinal útil de organização.
+o que o site oferece e quais páginas são mais relevantes. Não é um padrão oficial.
+**Por plataforma:** Perplexity indicou dar atenção ao arquivo; Google e OpenAI NÃO
+confirmaram leitura ativa de `/llms.txt` (podem apenas rastreá-lo como texto).
+Implemente por organização editorial e custo zero — não como alavanca de ranking.
 
 **Estrutura mínima:**
 
@@ -231,7 +244,7 @@ Execute nesta ordem — os primeiros itens têm maior retorno:
 - [ ] Cada H2 é uma pergunta seguida de resposta de 40-60 palavras?
 - [ ] Parágrafos funcionam isolados (sem referência a contexto anterior)?
 - [ ] Entidades nomeadas explicitamente (sem pronomes ambíguos)?
-- [ ] Dados em `<mark>`, definições em `<dfn>`, fontes em `<cite>`?
+- [ ] Dados em `<mark>`, definições em `<dfn>`, fontes em `<cite>`, listas de definição em `<dl>/<dt>/<dd>`?
 
 **Schema e marcação**
 - [ ] `speakable` implementado no resumo executivo e respostas de FAQ?
@@ -253,7 +266,7 @@ Com acesso à URL (via WebFetch ou conteúdo fornecido), avalie:
 1. Fetch da URL e verificação do conteúdo renderizado — o que o crawler vê.
 2. Presença e posição da resposta direta (está nos primeiros 80 termos?).
 3. Estrutura de H2s — funcionam como perguntas autocontidas?
-4. Marcação semântica: `<mark>`, `<dfn>`, `<cite>` presentes?
+4. Marcação semântica: `<mark>`, `<dfn>`, `<cite>`, `<dl>/<dt>/<dd>` presentes?
 5. Schema: `speakable`, `FAQPage`, `sameAs` — presentes e válidos?
 6. `robots.txt`: AI crawlers permitidos?
 7. `/llms.txt`: existe e está estruturado?
