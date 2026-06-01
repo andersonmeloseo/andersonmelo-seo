@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-label="andersonmelo-seo">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a0e1a"/>
+      <stop offset="1" stop-color="#0f1830"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#34d399"/>
+      <stop offset="1" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <style>.t{font-family:'Inter','Segoe UI',system-ui,-apple-system,Arial,sans-serif;}</style>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect x="0" y="0" width="10" height="640" fill="url(#accent)"/>
+
+  <!-- entity-graph motif -->
+  <g stroke="#2dd4bf" stroke-opacity="0.30" stroke-width="1.5" fill="none">
+    <line x1="1015" y1="150" x2="1140" y2="235"/>
+    <line x1="1140" y1="235" x2="1050" y2="360"/>
+    <line x1="1140" y1="235" x2="1220" y2="330"/>
+    <line x1="1015" y1="150" x2="935"  y2="270"/>
+    <line x1="935"  y1="270" x2="1050" y2="360"/>
+    <line x1="935"  y1="270" x2="985"  y2="420"/>
+    <line x1="1050" y1="360" x2="985"  y2="420"/>
+  </g>
+  <g fill="#34d399">
+    <circle cx="1140" cy="235" r="12" fill-opacity="0.95"/>
+    <circle cx="1015" cy="150" r="7"  fill-opacity="0.8"/>
+    <circle cx="935"  cy="270" r="8"  fill-opacity="0.8"/>
+    <circle cx="1050" cy="360" r="7"  fill-opacity="0.8"/>
+    <circle cx="1220" cy="330" r="6"  fill-opacity="0.7"/>
+    <circle cx="985"  cy="420" r="6"  fill-opacity="0.7"/>
+  </g>
+
+  <!-- wordmark -->
+  <text class="t" x="80" y="232" font-size="78" font-weight="800" fill="#e6edf3">andersonmelo<tspan fill="#34d399">-seo</tspan></text>
+  <text class="t" x="84" y="284" font-size="30" font-weight="500" fill="#8b9bb4">SEO de elite para Claude Code</text>
+
+  <!-- value -->
+  <text class="t" x="84" y="356" font-size="34" font-weight="700" fill="#2dd4bf">um consultor sênior que audita e constrói</text>
+
+  <!-- keyword lines -->
+  <text class="t" x="84" y="412" font-size="19" font-weight="500" fill="#aab6cc">topical authority &#160;·&#160; information gain &#160;·&#160; schema / knowledge graph &#160;·&#160; GEO / AEO / LLMO</text>
+  <text class="t" x="84" y="444" font-size="19" font-weight="500" fill="#aab6cc">programmatic em escala &#160;·&#160; Core Web Vitals &#160;·&#160; rank-and-rent &#160;·&#160; nunca alucina métrica</text>
+
+  <!-- install pill -->
+  <rect x="84" y="498" width="640" height="52" rx="10" fill="#0c1426" stroke="#243049"/>
+  <text class="t" x="108" y="531" font-size="19" font-family="'SF Mono','Fira Code',ui-monospace,Menlo,Consolas,monospace" fill="#7fe7c4">/plugin marketplace add andersonmeloseo/andersonmelo-seo</text>
+
+  <!-- author -->
+  <text class="t" x="84" y="596" font-size="16" font-weight="500" fill="#5d6b86">Anderson Melo · andersonmeloseo.com.br · MIT · 1 orquestrador + 8 sub-skills (PT-BR)</text>
+</svg>
