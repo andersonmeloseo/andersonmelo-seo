@@ -1,0 +1,47 @@
+name: Correção de SEO
+description: Reportar uma tática errada, claim desatualizado ou erro factual numa skill
+title: "[correção] "
+labels: ["seo-correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        SEO muda rápido e mitos persistem (keyword density, LSI, schema deprecado).
+        Correções com **fonte** são as contribuições mais valiosas deste projeto.
+  - type: dropdown
+    id: skill
+    attributes:
+      label: Skill afetada
+      options:
+        - seo (orquestrador)
+        - seo-auditoria
+        - seo-topical
+        - seo-on-page
+        - seo-geo
+        - seo-programmatic
+        - seo-schema
+        - seo-semantic-html
+        - seo-local-rank-and-rent
+        - referências (padroes-de-producao / metodologias)
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: O que está errado ou desatualizado
+      description: Cite o trecho exato da skill.
+    validations:
+      required: true
+  - type: textarea
+    id: correct
+    attributes:
+      label: O que é o correto
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Fonte (URL)
+      description: Documentação oficial do Google, estudo, patente, etc. Correções sem fonte têm prioridade menor.
+    validations:
+      required: false

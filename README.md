@@ -6,7 +6,8 @@
 
 ### An elite SEO plugin for Claude Code — a senior consultant that *audits* and *builds*.
 
-[![Version](https://img.shields.io/badge/version-0.1.0-blue)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.1.1-blue)](./CHANGELOG.md)
+[![validate](https://github.com/andersonmeloseo/andersonmelo-seo/actions/workflows/validate.yml/badge.svg)](https://github.com/andersonmeloseo/andersonmelo-seo/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin-7c3aed)](https://docs.claude.com/en/docs/claude-code)
 [![Made in](https://img.shields.io/badge/feito%20no-Brasil%20%F0%9F%87%A7%F0%9F%87%B7-009c3b)](https://andersonmeloseo.com.br)
