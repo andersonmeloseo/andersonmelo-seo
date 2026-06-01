@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>andersonmelo-seo — plugin de SEO de elite para Claude Code</title>
+<meta name="description" content="Plugin grátis e open-source de SEO para Claude Code: um consultor sênior que audita e constrói. Topical authority, schema, GEO/AEO, programmatic e rank-and-rent. Nunca alucina métrica.">
+<link rel="canonical" href="https://andersonmeloseo.com.br/andersonmelo-seo/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="andersonmelo-seo — SEO de elite para Claude Code">
+<meta property="og:description" content="Um consultor sênior que audita e constrói. 10 sub-skills + 5 subagents. Grátis, open-source, nunca alucina métrica.">
+<meta property="og:image" content="https://raw.githubusercontent.com/andersonmeloseo/andersonmelo-seo/main/assets/social-preview.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://github.com/andersonmeloseo/andersonmelo-seo#app",
+      "name": "andersonmelo-seo",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Claude Code",
+      "description": "Plugin de SEO de elite para Claude Code: um consultor sênior que audita e constrói. 10 sub-skills + 5 subagents de auditoria.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "license": "https://opensource.org/licenses/MIT",
+      "codeRepository": "https://github.com/andersonmeloseo/andersonmelo-seo",
+      "author": { "@id": "https://andersonmeloseo.com.br/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://andersonmeloseo.com.br/#person",
+      "name": "Anderson Melo",
+      "url": "https://andersonmeloseo.com.br",
+      "jobTitle": "Consultor de SEO"
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --bg:#0a0e1a; --bg2:#0f1830; --surface:#121b30; --surface2:#0c1426;
+    --border:#243049; --accent:#34d399; --accent2:#2dd4bf;
+    --text:#e6edf3; --muted:#9aa8c2; --dim:#5d6b86;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,"Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--text);line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  code,kbd{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:.92em}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  .accent{color:var(--accent)}
+  .teal{color:var(--accent2)}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:10;background:rgba(10,14,26,.82);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  nav .brand{font-weight:800;font-size:1.05rem}
+  nav .links a{color:var(--muted);margin-left:22px;font-size:.92rem}
+  nav .links a:hover{color:var(--text);text-decoration:none}
+  @media(max-width:640px){nav .links a:not(.btn){display:none}}
+
+  /* hero */
+  header.hero{background:linear-gradient(160deg,#0a0e1a,#0f1830);border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+  .hero-inner{padding:72px 0 64px;position:relative;z-index:2;max-width:760px}
+  .hero h1{font-size:clamp(2.4rem,6vw,3.6rem);font-weight:800;line-height:1.05;letter-spacing:-.02em}
+  .hero .tag{color:var(--muted);font-size:1.15rem;margin-top:14px}
+  .hero .value{color:var(--accent2);font-size:1.3rem;font-weight:700;margin-top:20px}
+  .pills{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+  .pill{font-size:.82rem;color:var(--muted);background:rgba(52,211,153,.09);border:1px solid var(--border);border-radius:999px;padding:5px 12px}
+  .cta{margin-top:30px;display:flex;flex-wrap:wrap;gap:12px}
+  .btn{display:inline-block;font-weight:700;font-size:.95rem;padding:12px 22px;border-radius:10px;border:1px solid var(--border)}
+  .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#06281d;border:none}
+  .btn.primary:hover{filter:brightness(1.08);text-decoration:none}
+  .btn.ghost{color:var(--text);background:var(--surface)}
+  .btn.ghost:hover{border-color:var(--accent);text-decoration:none}
+  .install{margin-top:26px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px 18px;font-family:ui-monospace,Menlo,monospace;font-size:.9rem;color:#9fe9c9;overflow-x:auto}
+  .install .c{color:var(--dim)}
+
+  /* sections */
+  section{padding:60px 0;border-bottom:1px solid var(--border)}
+  section h2{font-size:1.9rem;font-weight:800;letter-spacing:-.01em}
+  section h2 .em{font-size:1.4rem;margin-right:8px}
+  section .lead{color:var(--muted);max-width:720px;margin-top:10px}
+  .modes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+  @media(max-width:640px){.modes{grid-template-columns:1fr}}
+  .mode{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+  .mode b{color:var(--accent)}
+
+  /* compare */
+  .compare{width:100%;border-collapse:collapse;margin-top:24px;font-size:.95rem}
+  .compare th,.compare td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+  .compare thead th{color:var(--dim);font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.04em}
+  .compare td:last-child{color:var(--text)}
+  .compare td.win{color:var(--accent2);font-weight:600}
+
+  /* skills grid */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;transition:border-color .15s,transform .15s}
+  .card:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .card h3{font-size:1rem;font-family:ui-monospace,Menlo,monospace;color:var(--accent)}
+  .card p{color:var(--muted);font-size:.92rem;margin-top:6px}
+  .grouplabel{margin-top:30px;font-weight:700;color:var(--text);font-size:1.05rem}
+  .agents{margin-top:18px;color:var(--muted);font-size:.92rem;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:16px 18px}
+  .agents code{color:var(--accent2)}
+
+  /* tables generic */
+  table.t{width:100%;border-collapse:collapse;margin-top:22px;font-size:.93rem}
+  table.t th,table.t td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top}
+  table.t thead th{color:var(--dim);font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+  table.t td code{color:var(--accent2)}
+
+  /* recipes */
+  .recipe{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin-top:16px}
+  .recipe h3{font-size:1.05rem}
+  .recipe ol{margin:10px 0 0 20px;color:var(--muted)}
+  .recipe ol li{margin:4px 0}
+  .recipe code{color:var(--accent2)}
+
+  /* faq */
+  details{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-top:10px}
+  details summary{cursor:pointer;font-weight:600;color:var(--text)}
+  details p{color:var(--muted);margin-top:8px}
+  details[open]{border-color:var(--accent)}
+
+  /* cta band */
+  .band{background:linear-gradient(160deg,#0f1830,#0a0e1a);text-align:center}
+  .band h2{font-size:2rem}
+  .band p{color:var(--muted);margin-top:10px}
+
+  footer{padding:36px 0;color:var(--dim);font-size:.88rem}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <span class="brand">andersonmelo<span class="accent">-seo</span></span>
+    <span class="links">
+      <a href="#skills">Skills</a>
+      <a href="#instalar">Instalar</a>
+      <a href="#comandos">Comandos</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn ghost" href="https://github.com/andersonmeloseo/andersonmelo-seo" style="padding:7px 14px">GitHub ★</a>
+    </span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <h1>SEO de elite para <span class="accent">Claude Code</span></h1>
+    <p class="tag">Um consultor sênior que <strong>audita</strong> e <strong>constrói</strong> — não uma ferramenta que reporta dado.</p>
+    <p class="value">10 sub-skills · 5 subagents de auditoria · nunca alucina métrica</p>
+    <div class="pills">
+      <span class="pill">topical authority</span>
+      <span class="pill">information gain</span>
+      <span class="pill">schema / knowledge graph</span>
+      <span class="pill">GEO / AEO / LLMO</span>
+      <span class="pill">programmatic em escala</span>
+      <span class="pill">rank-and-rent</span>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="#instalar">Instalar</a>
+      <a class="btn ghost" href="https://github.com/andersonmeloseo/andersonmelo-seo">Ver no GitHub</a>
+    </div>
+    <div class="install">
+      <span class="c"># no seu Claude Code</span><br>
+      /plugin marketplace add andersonmeloseo/andersonmelo-seo<br>
+      /plugin install andersonmelo-seo@andersonmelo-seo
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section id="oque">
+  <div class="wrap">
+    <h2><span class="em">🧭</span>O que é</h2>
+    <p class="lead">Um plugin de <strong>metodologia</strong>, não de ferramenta. Transforma o Claude Code num consultor de SEO, GEO e AEO que diagnostica um site em 9 camadas <em>e</em> constrói o que falta — topical maps, páginas programáticas, schema, HTML5 semântico. Sem depender de API paga para começar.</p>
+    <div class="modes">
+      <div class="mode"><b>Modo Execução</b> — há dado ou URL acessível. Analisa de verdade, cita evidência, quantifica.</div>
+      <div class="mode"><b>Modo Framework</b> — falta dado. Entrega o método e o que coletar — e <strong>nunca apresenta estimativa como medição</strong>.</div>
+    </div>
+  </div>
+</section>
+
+<section id="diferente">
+  <div class="wrap">
+    <h2><span class="em">⚡</span>Por que é diferente</h2>
+    <table class="compare">
+      <thead><tr><th></th><th>Plugins ferramenta-first</th><th>andersonmelo-seo</th></tr></thead>
+      <tbody>
+        <tr><td>Aposta central</td><td>APIs, crawls, scripts</td><td class="win">Metodologia de estrategista sênior</td></tr>
+        <tr><td>Postura</td><td>Reporta dados</td><td class="win">Audita <em>e</em> constrói</td></tr>
+        <tr><td>Disciplina de dados</td><td>Costuma chutar</td><td class="win">2 modos — nunca alucina métrica</td></tr>
+        <tr><td>Programmatic</td><td>Gera volume</td><td class="win">Volume só com Information Gain por página</td></tr>
+        <tr><td>Ratings / schema</td><td>"Adicione aggregateRating"</td><td class="win">Integridade de ratings — marcação que você defende numa auditoria do Google</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2><span class="em">🧠</span>O que vem dentro</h2>
+    <p class="lead">1 orquestrador (<code>/seo</code>) + 10 sub-skills + 5 subagents. Chame direto ou só descreva o problema — o orquestrador roteia.</p>
+
+    <p class="grouplabel">🔍 Diagnosticar</p>
+    <div class="grid">
+      <article class="card"><h3>seo-auditoria</h3><p>Auditoria completa em 9 camadas → health score 0-100 + plano priorizado.</p></article>
+      <article class="card"><h3>seo-topical</h3><p>Topical authority: mapa de tópicos entity-first, clusters, cobertura de intenção.</p></article>
+      <article class="card"><h3>seo-on-page</h3><p>Otimização on-page de uma URL + content brief competitivo.</p></article>
+      <article class="card"><h3>seo-geo</h3><p>Citabilidade por IA: AI Overviews, ChatGPT, Perplexity, Gemini, Claude.</p></article>
+      <article class="card"><h3>seo-backlinks</h3><p>Perfil de links e autoridade — free-tier (GSC/Bing/Common Crawl) ou pago.</p></article>
+    </div>
+
+    <p class="grouplabel">🏗️ Construir</p>
+    <div class="grid">
+      <article class="card"><h3>seo-programmatic</h3><p>Páginas em escala, data-driven, com travas anti-thin / near-duplicate.</p></article>
+      <article class="card"><h3>seo-schema</h3><p>Schema/JSON-LD <code>@graph</code>, knowledge graph, integridade de ratings.</p></article>
+      <article class="card"><h3>seo-semantic-html</h3><p>HTML5 semântico + Core Web Vitals na marcação + Lighthouse 100 + a11y.</p></article>
+      <article class="card"><h3>seo-local-rank-and-rent</h3><p>Local SEO (GBP, NAP, citações) + playbook rank-and-rent.</p></article>
+      <article class="card"><h3>seo-hreflang</h3><p>SEO internacional: auditoria e geração de hreflang (return tags, x-default).</p></article>
+    </div>
+
+    <div class="agents">
+      <strong>⚙️ Subagents de auditoria</strong> — a <code>seo-auditoria</code> dispara cinco especialistas em paralelo para sites grandes:
+      <code>seo-auditor-tecnico</code> · <code>seo-auditor-conteudo</code> · <code>seo-auditor-schema</code> · <code>seo-auditor-geo</code> · <code>seo-auditor-arquitetura</code>.
+    </div>
+  </div>
+</section>
+
+<section id="instalar">
+  <div class="wrap">
+    <h2><span class="em">📦</span>Instalação</h2>
+    <p class="lead">Recomendado — plugin nativo (as skills ficam isoladas por namespace, sem conflito com outros plugins):</p>
+    <div class="install">
+      /plugin marketplace add andersonmeloseo/andersonmelo-seo<br>
+      /plugin install andersonmelo-seo@andersonmelo-seo
+    </div>
+    <p class="lead" style="margin-top:18px">Fallback manual (se <code>/plugin</code> não existir no seu ambiente):</p>
+    <div class="install">
+      git clone --depth 1 https://github.com/andersonmeloseo/andersonmelo-seo.git<br>
+      bash andersonmelo-seo/install.sh
+    </div>
+  </div>
+</section>
+
+<section id="comandos">
+  <div class="wrap">
+    <h2><span class="em">⌨️</span>Comandos</h2>
+    <table class="t">
+      <thead><tr><th>Comando</th><th>Faz</th><th>Exemplo</th></tr></thead>
+      <tbody>
+        <tr><td><code>auditoria</code></td><td>Auditoria + health score + plano</td><td><code>/seo auditoria https://seusite.com.br</code></td></tr>
+        <tr><td><code>topical</code></td><td>Mapa de tópicos / arquitetura</td><td><code>/seo topical "consultoria tributária"</code></td></tr>
+        <tr><td><code>on-page</code></td><td>On-page de URL ou content brief</td><td><code>/seo on-page https://.../artigo/</code></td></tr>
+        <tr><td><code>geo</code></td><td>Citabilidade por IA</td><td><code>/seo geo https://seusite.com.br</code></td></tr>
+        <tr><td><code>backlinks</code></td><td>Perfil de links e autoridade</td><td><code>/seo backlinks seusite.com.br</code></td></tr>
+        <tr><td><code>schema</code></td><td>Detectar/validar/gerar JSON-LD</td><td><code>/seo schema https://seusite.com.br</code></td></tr>
+        <tr><td><code>programmatic</code></td><td>Plano de páginas em escala</td><td><code>/seo programmatic plano</code></td></tr>
+        <tr><td><code>local</code></td><td>Local SEO + rank-and-rent</td><td><code>/seo local "encanador em Campinas"</code></td></tr>
+        <tr><td><code>hreflang</code></td><td>Auditoria/geração de hreflang</td><td><code>/seo hreflang https://seusite.com.br</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="receitas">
+  <div class="wrap">
+    <h2><span class="em">🍳</span>Receitas</h2>
+    <div class="recipe">
+      <h3>🏙️ Lançar um portal programático de cidades</h3>
+      <ol>
+        <li><code>/seo topical "&lt;seu serviço&gt;"</code> — entidade central e mapa.</li>
+        <li><code>/seo programmatic plano</code> — confirma o dataset que diferencia cada página + padrão de URL.</li>
+        <li><code>/seo schema …</code> — <code>@graph</code> de LocalBusiness por página.</li>
+      </ol>
+    </div>
+    <div class="recipe">
+      <h3>🤖 Fazer um conteúdo ser citado pela IA</h3>
+      <ol>
+        <li><code>/seo on-page &lt;url&gt;</code> — resposta direta no topo, entidades nomeadas, estrutura de passagem.</li>
+        <li><code>/seo schema &lt;url&gt;</code> — speakable, FAQ, autor com sameAs.</li>
+        <li><code>/seo geo &lt;url&gt;</code> — llms.txt, AI crawlers, citabilidade.</li>
+      </ol>
+    </div>
+    <div class="recipe">
+      <h3>🔗 Avaliar autoridade sem ferramenta paga</h3>
+      <ol>
+        <li><code>/seo backlinks seudominio.com</code> — em Modo Framework te diz o que coletar de graça (GSC, Bing Webmaster, Common Crawl).</li>
+        <li>Cole o export → ele quantifica em Modo Execução.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="metodologia">
+  <div class="wrap">
+    <h2><span class="em">📐</span>A metodologia</h2>
+    <p class="lead">O plugin aplica a lente certa para cada problema, não só roda checagens:</p>
+    <table class="t">
+      <tbody>
+        <tr><td><strong>Koray Tuğberk Gübür</strong></td><td>topical maps, cobertura de nicho, profundidade antes de largura</td></tr>
+        <tr><td><strong>Dixon Jones</strong></td><td>o site como grafo de entidades, <code>sameAs</code>, consolidação de marca</td></tr>
+        <tr><td><strong>Bill Slawski</strong></td><td>decisões fundamentadas em recuperação de informação, não folclore</td></tr>
+        <tr><td><strong>Google QRG (set/2025)</strong></td><td>E-E-A-T e a linha vermelha do scaled content abuse</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2><span class="em">❓</span>Perguntas frequentes</h2>
+    <details><summary>Preciso de API paga (Ahrefs, Semrush)?</summary><p>Não para começar. As skills operam com coleta de página e dados gratuitos (GSC, Bing Webmaster, Common Crawl). Dados pagos, quando você os cola, deixam a análise mais precisa.</p></details>
+    <details><summary>Funciona em inglês?</summary><p>As skills são escritas em português, mas a metodologia é universal — o Claude executa no idioma em que você fala com ele.</p></details>
+    <details><summary>Vai conflitar com outro plugin de SEO?</summary><p>Via <code>/plugin</code> não — as skills ficam isoladas por namespace. Só o install manual sobrescreve skills de mesmo nome.</p></details>
+    <details><summary>É grátis mesmo?</summary><p>Sim. Licença MIT, código aberto. Use, modifique, contribua.</p></details>
+    <details><summary>O plugin inventa números?</summary><p>Não — é o princípio central. Sem dado real, opera em Modo Framework e te diz o que coletar.</p></details>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>Precisa de SEO de verdade no seu projeto?</h2>
+    <p>SEO programático, Local SEO, rank-and-rent e GEO — Brasil, EUA e Espanha.</p>
+    <div class="cta" style="justify-content:center">
+      <a class="btn primary" href="https://andersonmeloseo.com.br">Fale com Anderson Melo</a>
+      <a class="btn ghost" href="https://github.com/andersonmeloseo/andersonmelo-seo">⭐ Deixe uma estrela</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>andersonmelo-seo · MIT · feito no Brasil 🇧🇷</span>
+    <span>
+      <a href="https://github.com/andersonmeloseo/andersonmelo-seo">GitHub</a> ·
+      <a href="https://andersonmeloseo.com.br">andersonmeloseo.com.br</a>
+    </span>
+  </div>
+</footer>
+
+</body>
+</html>
