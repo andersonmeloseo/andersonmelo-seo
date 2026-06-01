@@ -68,6 +68,24 @@ if os.path.isdir(agents_dir):
         check("name:" in fm, f"agents/{fn}: falta 'name'")
         check("description:" in fm, f"agents/{fn}: falta 'description'")
 
+# 4) Consistência de contagem e roteamento (impede deriva de "N sub-skills")
+sub_skills = [d for d in sorted(os.listdir(skills_dir))
+              if d != "seo" and os.path.isfile(os.path.join(skills_dir, d, "SKILL.md"))]
+n_sub = len(sub_skills)
+
+for mf in [".claude-plugin/plugin.json", ".claude-plugin/marketplace.json"]:
+    txt = open(os.path.join(ROOT, mf), encoding="utf-8").read()
+    for m in re.finditer(r"(\d+)\s+sub-skills", txt):
+        check(int(m.group(1)) == n_sub,
+              f"{mf}: declara '{m.group(1)} sub-skills' mas existem {n_sub}")
+
+orch = open(os.path.join(skills_dir, "seo", "SKILL.md"), encoding="utf-8").read()
+for s in sub_skills:
+    check(s in orch, f"orquestrador (seo): sub-skill '{s}' não aparece no roteamento")
+m = re.search(r"Roteador de (\d+) sub-skills", orch)
+check(bool(m) and int(m.group(1)) == n_sub,
+      f"orquestrador: 'Roteador de N sub-skills' != {n_sub}")
+
 if errors:
     print("✗ Validação falhou:")
     for err in errors:

@@ -1,6 +1,6 @@
 # Architecture
 
-`andersonmelo-seo` is a Claude Code plugin: one orchestrator skill that routes to nine
+`andersonmelo-seo` is a Claude Code plugin: one orchestrator skill that routes to ten
 specialist sub-skills, sharing two reference files. The design encodes how a senior SEO
 consultant thinks — diagnose first, build second, and never guess a number.
 
