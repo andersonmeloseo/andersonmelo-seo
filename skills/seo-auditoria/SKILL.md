@@ -48,6 +48,15 @@ A partir da home, identifique o modelo: SaaS/produto digital, negócio local de 
 
 Varra cada camada em sequência. A ordem não é arbitrária: problemas das camadas iniciais invalidam o esforço das posteriores. Se a camada 1 bloqueia rastreamento, as camadas 3 a 9 são ruído.
 
+**Delegação paralela (quando há subagents):** em ambiente com subagents disponíveis, dispare os cinco auditores especialistas em paralelo — é mais rápido e mais profundo em sites grandes:
+- `seo-auditor-tecnico` → camadas 1, 2, 8 (rastreabilidade, renderização, performance, segurança)
+- `seo-auditor-arquitetura` → camadas 3, 4 (estrutura, cobertura de intenção, canibalização)
+- `seo-auditor-conteudo` → camadas 5 (conteúdo) e 6 (E-E-A-T)
+- `seo-auditor-schema` → schema/JSON-LD da camada 5 (coleta o HTML cru, não confia no WebFetch)
+- `seo-auditor-geo` → camada 9 (AI Search)
+
+Cada auditor devolve achados no formato evidência→impacto→esforço→prioridade + uma nota 0-100 da sua dimensão; você consolida no relatório e no health score. Sem subagents, varra as camadas inline na sequência abaixo.
+
 ### Camada 1 — Rastreabilidade e indexação
 O que investigar: robots.txt bloqueando caminhos importantes; sitemap desatualizado ou ausente; URLs com `noindex` onde não deveria; parâmetros de URL gerando duplicatas rastreáveis (filtros, ordenação, paginação sem canonical); páginas órfãs sem link interno; explosão combinatória de URLs (faceted navigation, calendários, tags sem limite). Em sites com 30+ páginas de localidade, acione o quality gate de escala (ver abaixo).
 

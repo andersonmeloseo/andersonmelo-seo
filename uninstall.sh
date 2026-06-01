@@ -34,5 +34,14 @@ for s in "${SKILLS[@]}"; do
   fi
 done
 
+AGENTS=(seo-auditor-tecnico seo-auditor-conteudo seo-auditor-schema seo-auditor-geo seo-auditor-arquitetura)
+AGENT_ROOT="${HOME}/.claude/agents"
+for a in "${AGENTS[@]}"; do
+  if [ -f "${AGENT_ROOT}/${a}.md" ]; then
+    rm -f "${AGENT_ROOT}/${a}.md"
+    echo "  ✓ removido agent: ${a}"
+  fi
+done
+
 echo ""
 echo "✓ andersonmelo-seo desinstalado."

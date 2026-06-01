@@ -6,7 +6,7 @@
 
 ### An elite SEO plugin for Claude Code — a senior consultant that *audits* and *builds*.
 
-[![Version](https://img.shields.io/badge/version-0.1.1-blue)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.2.0-blue)](./CHANGELOG.md)
 [![validate](https://github.com/andersonmeloseo/andersonmelo-seo/actions/workflows/validate.yml/badge.svg)](https://github.com/andersonmeloseo/andersonmelo-seo/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin-7c3aed)](https://docs.claude.com/en/docs/claude-code)
@@ -65,6 +65,10 @@ One orchestrator (`/seo`) routes to eight specialists, grouped by the two jobs:
 | **seo-schema** | Schema/JSON-LD `@graph`, knowledge graph, ratings integrity |
 | **seo-semantic-html** | Semantic HTML5 + Core Web Vitals in the markup + Lighthouse 100 + a11y |
 | **seo-local-rank-and-rent** | Local SEO (GBP, NAP, citations) + the rank-and-rent / lead-gen playbook |
+
+### ⚙️ Parallel audit
+
+`seo-auditoria` fans out to five specialist subagents — **técnico · conteúdo · schema · geo · arquitetura** — for fast, deep audits of large sites. Each returns findings as evidence → impact → effort → priority, aggregated into the health score.
 
 ## Install
 

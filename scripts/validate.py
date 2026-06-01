@@ -55,6 +55,19 @@ for name in sorted(os.listdir(skills_dir)):
         check(not leaked,
               f"{name}: description contém template do spec não resolvido (<PT-BR/pushy)")
 
+# 3) Frontmatter dos agents (audit subagents), se houver
+agents_dir = os.path.join(ROOT, "agents")
+if os.path.isdir(agents_dir):
+    for fn in sorted(os.listdir(agents_dir)):
+        if not fn.endswith(".md"):
+            continue
+        text = open(os.path.join(agents_dir, fn), encoding="utf-8").read()
+        fm_match = re.match(r"^---\n(.*?)\n---", text, re.S)
+        check(bool(fm_match), f"agents/{fn}: frontmatter ausente")
+        fm = fm_match.group(1) if fm_match else ""
+        check("name:" in fm, f"agents/{fn}: falta 'name'")
+        check("description:" in fm, f"agents/{fn}: falta 'description'")
+
 if errors:
     print("✗ Validação falhou:")
     for err in errors:

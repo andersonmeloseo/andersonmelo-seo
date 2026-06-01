@@ -13,6 +13,12 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 - Referência compartilhada de padrões de produção.
 - Instalador manual (`install.sh`/`uninstall.sh`) como fallback ao `/plugin`.
 
+## [0.2.0] — 2026-06
+
+### Adicionado
+- **Subagents de auditoria** (`agents/`): `seo-auditor-tecnico`, `seo-auditor-conteudo`, `seo-auditor-schema`, `seo-auditor-geo`, `seo-auditor-arquitetura`. A skill `seo-auditoria` os dispara em paralelo (mais rápido e profundo em sites grandes); cada um devolve achados evidência->impacto->esforço->prioridade + nota 0-100 da sua dimensão.
+- Vitrine e rigor de repo: banner SVG, social preview card, `docs/ARCHITECTURE.md`, `CONTRIBUTING.md`, CI de validação (`scripts/validate.py` + GitHub Actions) e templates de issue/PR.
+
 ## [0.1.1] — 2026-06
 
 ### Corrigido
