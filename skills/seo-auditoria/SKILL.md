@@ -155,7 +155,7 @@ Uma seção para cada camada das 9 auditadas. Cada seção: o que foi encontrado
 Lista ordenada de ações: Critical primeiro, depois High, Medium, Low. Para cada ação: o que fazer, por quê importa, qual página ou sistema afeta, e se há dependência com outra ação (ex.: "corrigir renderização antes de otimizar on-page"). Correções de HTML, schema ou conteúdo geradas seguem `../seo/references/padroes-de-producao.md`.
 
 **4. O que APIs e credenciais adicionariam**
-Declare explicitamente o que não foi possível auditar sem acesso a: Google Search Console (cobertura de indexação real, impressões por query, erros de rastreamento), CrUX/PageSpeed com dados de campo (LCP/CLS/INP reais), ferramentas de backlink (Ahrefs, Semrush, Moz) para perfil de links, Google Business Profile para local SEO. Cada item ausente é uma zona cega — nomeie ela.
+Declare explicitamente o que não foi possível auditar sem acesso a: Google Search Console (cobertura de indexação real, impressões por query, erros de rastreamento), CrUX/PageSpeed com dados de campo (LCP/CLS/INP reais), ferramentas de backlink (Ahrefs, Semrush, Moz) para perfil de links — o método de coleta, inclusive free-tier (GSC/Bing/Common Crawl), está na skill `seo-backlinks`, Google Business Profile para local SEO. Cada item ausente é uma zona cega — nomeie ela.
 
 **5. Próximo passo concreto**
 Uma ação única e específica que o usuário deve fazer amanhã. Não uma lista de "próximos passos". Uma ação, com instrução suficiente para executar. O relatório termina aqui.

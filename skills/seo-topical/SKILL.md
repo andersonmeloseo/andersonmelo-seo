@@ -233,6 +233,6 @@ Todo conteúdo gerado a partir do mapa segue `../seo/references/padroes-de-produ
 - Não gera conteúdo de página — isso é `seo-on-page`
 - Não otimiza schema individualmente — isso é `seo-schema`
 - Não audita performance técnica — isso é `seo-auditoria`
-- Não define estratégia de link building — estratégia de link building não está coberta nesta versão do plugin (a `seo-auditoria` só diagnostica o perfil de links existente)
+- Não constrói links aqui — estratégia e *earning* de links ficam na skill `seo-backlinks` (perfil, anchor text, link gap, ativos linkáveis); a `seo-auditoria` diagnostica o perfil de links existente
 
 O mapa é o pré-requisito. Tudo o mais vem depois, e vem daqui.
