@@ -22,6 +22,7 @@ Depois, teste com qualquer um destes (copia e cola):
 /seo schema https://seusite.com.br
 /seo geo https://seusite.com.br
 /seo backlinks seusite.com.br
+/seo hreflang https://seusite.com.br
 /seo local "encanador em Campinas"
 /seo programmatic plano
 ```

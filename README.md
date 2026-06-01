@@ -6,7 +6,7 @@
 
 ### An elite SEO plugin for Claude Code — a senior consultant that *audits* and *builds*.
 
-[![Version](https://img.shields.io/badge/version-0.3.0-blue)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.4.0-blue)](./CHANGELOG.md)
 [![validate](https://github.com/andersonmeloseo/andersonmelo-seo/actions/workflows/validate.yml/badge.svg)](https://github.com/andersonmeloseo/andersonmelo-seo/actions/workflows/validate.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-plugin-7c3aed)](https://docs.claude.com/en/docs/claude-code)
@@ -48,7 +48,7 @@ Every skill operates in one of two declared modes:
 
 ## The skills
 
-One orchestrator (`/seo`) routes to nine specialists, grouped by the two jobs:
+One orchestrator (`/seo`) routes to ten specialists, grouped by the two jobs:
 
 ### 🔍 Diagnose
 | Skill | What it does |
@@ -66,6 +66,7 @@ One orchestrator (`/seo`) routes to nine specialists, grouped by the two jobs:
 | **seo-schema** | Schema/JSON-LD `@graph`, knowledge graph, ratings integrity |
 | **seo-semantic-html** | Semantic HTML5 + Core Web Vitals in the markup + Lighthouse 100 + a11y |
 | **seo-local-rank-and-rent** | Local SEO (GBP, NAP, citations) + the rank-and-rent / lead-gen playbook |
+| **seo-hreflang** | International SEO: hreflang audit + generation, return tags, x-default, language/region codes |
 
 ### ⚙️ Parallel audit
 

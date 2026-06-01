@@ -13,6 +13,11 @@ e o versionamento segue [SemVer](https://semver.org/lang/pt-BR/).
 - Referência compartilhada de padrões de produção.
 - Instalador manual (`install.sh`/`uninstall.sh`) como fallback ao `/plugin`.
 
+## [0.4.0] — 2026-06
+
+### Adicionado
+- Nova sub-skill **`seo-hreflang`**: auditoria e geração de hreflang / SEO internacional — bidirecionalidade (return tags), `x-default`, códigos ISO de idioma/região, e os erros que anulam o conjunto. Começa confirmando se hreflang é necessário (site monolíngue não precisa).
+
 ## [0.3.0] — 2026-06
 
 ### Adicionado

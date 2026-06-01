@@ -6,13 +6,13 @@
     "url": "https://github.com/andersonmeloseo"
   },
   "metadata": {
-    "description": "Plugin de SEO de elite para Claude Code — metodologia de consultor sênior que AUDITA e CONSTRÓI. Topical authority (Koray Tuğberk Gübür), knowledge graph e entidades (Dixon Jones), Information Gain, SEO programático em escala com travas anti-thin, rank-and-rent local, HTML5 semântico, schema/JSON-LD, performance Lighthouse 100 e GEO/AEO/LLMO para AI Search (ChatGPT, Perplexity, Google AI Overviews, Gemini, Claude). Orquestrador + 9 sub-skills + 5 subagents de auditoria paralela, em português, com 2 modos de operação que nunca alucinam métrica."
+    "description": "Plugin de SEO de elite para Claude Code — metodologia de consultor sênior que AUDITA e CONSTRÓI. Topical authority (Koray Tuğberk Gübür), knowledge graph e entidades (Dixon Jones), Information Gain, SEO programático em escala com travas anti-thin, rank-and-rent local, HTML5 semântico, schema/JSON-LD, performance Lighthouse 100 e GEO/AEO/LLMO para AI Search (ChatGPT, Perplexity, Google AI Overviews, Gemini, Claude). Orquestrador + 10 sub-skills + 5 subagents de auditoria paralela, em português, com 2 modos de operação que nunca alucinam métrica."
   },
   "plugins": [
     {
       "name": "andersonmelo-seo",
       "source": "./",
-      "description": "SEO de elite para Claude Code: um consultor sênior que diagnostica e constrói. Auditoria técnica/semântica, topical authority, mapas de tópicos e entidades, Information Gain, on-page e content briefs, schema/knowledge graph, SEO programático em escala, rank-and-rent local, HTML5 semântico, performance e GEO/AEO/LLMO. 1 orquestrador + 9 sub-skills + 5 subagents de auditoria, PT-BR.",
+      "description": "SEO de elite para Claude Code: um consultor sênior que diagnostica e constrói. Auditoria técnica/semântica, topical authority, mapas de tópicos e entidades, Information Gain, on-page e content briefs, schema/knowledge graph, SEO programático em escala, rank-and-rent local, HTML5 semântico, performance e GEO/AEO/LLMO. 1 orquestrador + 10 sub-skills + 5 subagents de auditoria, PT-BR.",
       "author": {
         "name": "Anderson Melo",
         "email": "andersonmeloseo@gmail.com",

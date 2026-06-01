@@ -27,7 +27,8 @@ seo (orchestrator)              ← identity, 2 modes, priority sequence, routin
     ├── seo-programmatic        ← pages at scale with anti-thin safeguards
     ├── seo-schema              ← JSON-LD @graph, knowledge graph, ratings integrity
     ├── seo-semantic-html       ← semantic HTML5 + Core Web Vitals + a11y
-    └── seo-local-rank-and-rent ← local SEO + rank-and-rent playbook
+    ├── seo-local-rank-and-rent ← local SEO + rank-and-rent playbook
+    └── seo-hreflang            ← international SEO (hreflang audit + generation)
 ```
 
 ## The two modes (the core principle)
