@@ -3,22 +3,18 @@ set -euo pipefail
 
 # ════════════════════════════════════════════════════════════════
 #  andersonmelo-seo — instalador manual
-#  Use SOMENTE quando o comando nativo /plugin não estiver disponível
-#  no seu ambiente. O caminho recomendado é:
+#  Use quando o comando nativo /plugin NÃO estiver disponível no seu
+#  ambiente. Caminho recomendado (se você tem /plugin):
 #     /plugin marketplace add andersonmeloseo/andersonmelo-seo
 #     /plugin install andersonmelo-seo@andersonmelo-seo
-#  (via /plugin as skills ficam isoladas por namespace e não colidem
-#   com outros plugins de SEO instalados.)
 #
-#  Este script copia as skills para ~/.claude/skills/ e os agents para
-#  ~/.claude/agents/ — locais que o Claude Code lê nativamente.
+#  Este script copia TODAS as skills para ~/.claude/skills/ e os
+#  agents para ~/.claude/agents/ — locais que o Claude Code lê
+#  nativamente (instala o que existir no repo; nunca fica desatualizado).
 # ════════════════════════════════════════════════════════════════
 
 REPO_URL="https://github.com/andersonmeloseo/andersonmelo-seo"
 REPO_TAG="${ANDERSONMELO_SEO_TAG:-main}"
-
-# Skills deste plugin (lista explícita — uninstall remove exatamente estas)
-SKILLS=(seo seo-auditoria seo-topical seo-on-page seo-geo seo-programmatic seo-schema seo-semantic-html seo-local-rank-and-rent)
 
 main() {
   SKILL_ROOT="${HOME}/.claude/skills"
@@ -43,30 +39,32 @@ main() {
     SRC="${TMP}/repo"
   fi
 
-  # Copia as skills (avisa sobre sobrescrita — outro plugin de SEO pode usar o mesmo nome)
+  # Copia TODAS as skills do repo (dinâmico — sem lista fixa que envelhece)
   echo "→ Instalando skills..."
-  for s in "${SKILLS[@]}"; do
-    if [ -d "${SRC}/skills/${s}" ]; then
-      if [ -d "${SKILL_ROOT}/${s}" ]; then
-        echo "  ⚠  '${s}' já existe em ${SKILL_ROOT} — será sobrescrita (verifique conflito com outro plugin)."
-      fi
-      rm -rf "${SKILL_ROOT}/${s}"
-      cp -r "${SRC}/skills/${s}" "${SKILL_ROOT}/${s}"
-      echo "  ✓ ${s}"
+  for skill_dir in "${SRC}/skills"/*/; do
+    [ -d "${skill_dir}" ] || continue
+    s="$(basename "${skill_dir}")"
+    if [ -d "${SKILL_ROOT}/${s}" ]; then
+      echo "  ⚠  '${s}' já existe em ${SKILL_ROOT} — será sobrescrita (verifique conflito com outro plugin de SEO)."
     fi
+    rm -rf "${SKILL_ROOT}/${s}"
+    cp -r "${SRC}/skills/${s}" "${SKILL_ROOT}/${s}"
+    echo "  ✓ ${s}"
   done
 
-  # Copia agents (se houver)
+  # Copia todos os agents (se houver)
   if compgen -G "${SRC}/agents/*.md" >/dev/null 2>&1; then
     echo "→ Instalando agents..."
-    cp -r "${SRC}/agents/"*.md "${AGENT_ROOT}/" 2>/dev/null || true
+    for a in "${SRC}/agents/"*.md; do
+      cp "${a}" "${AGENT_ROOT}/" && echo "  ✓ $(basename "${a}")"
+    done
   fi
 
   echo ""
   echo "✓ andersonmelo-seo instalado."
-  echo "  Uso:  /seo auditoria https://exemplo.com"
-  echo "        /seo topical \"sua entidade central\""
-  echo "  Desinstalar:  bash uninstall.sh"
+  echo "  Reinicie o Claude Code (ou abra uma nova sessão) e teste:"
+  echo "     /seo auditoria https://exemplo.com"
+  echo "  Desinstalar: bash uninstall.sh"
 }
 
 main "$@"
